@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 hello whatss up!
+=======
+hello
+>>>>>>> 5f351670547461dfc54bc8de414d016264d9a09a
