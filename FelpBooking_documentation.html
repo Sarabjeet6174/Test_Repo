@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Felp Pets Technical Specification</title>
+    <title>FelpBooking Technical Specification</title>
     <style>
         :root {
             --primary-color: #000000;
@@ -281,7 +281,7 @@
 <body>
     <!-- Navigation Menu -->
     <nav class="nav-menu">
-        <h1>Felp Pets Technical Specification</h1>
+        <h1>FelpBooking Technical Specification</h1>
         <div class="nav-links">
             <a href="#overview">Overview</a>
             <a href="#architecture">Architecture</a>
@@ -300,9 +300,9 @@
     </nav>
 
     <header>
-        <h1>Felp Pets Technical Specification</h1>
+        <h1>FelpBooking Technical Specification</h1>
         <p><strong>Version:</strong> 1.0.0 | <strong>Last Updated:</strong> September 19, 2025</p>
-        <p><em>A comprehensive technical specification for Felp Pets with HTML/JS frontend and Python-Fast API backend</em></p>
+        <p><em>A comprehensive technical specification for FelpBooking with HTML/JS frontend and Python-Fast API backend</em></p>
     </header>
 
     <section id="overview" class="section">
@@ -558,25 +558,31 @@
 
     <h3>Project Structure</h3>
     <pre><code>frontend/
-    ├── pet/
-    └── pet/
-        ├── home.html           # Home page
-        ├── about.html          # About page
-        ├── profile.html        # User profile page
-        ├── register.html       # Registration page
-        ├── signin.html         # Sign-in page
-        ├── legal.html          # Legal information
-        ├── policy.html         # Privacy policy
-        ├── t&c.html            # Terms & conditions
-        ├── app.js              # Main JS for interactivity and API calls
-        ├── app.css             # Main CSS styles
-        ├── home.css            # Home page specific styles
-        ├── styles.css          # Shared/global styles
-        ├── style2.css          # Additional styles
-        ├── tailwind.config.js  # Tailwind CSS configuration
-        ├── felp-ai-universal.js# Shared JS logic
-        ├── assest/             # Images, icons, and other static files
-        └── js/                 # Additional JS modules
+    ├──FelpBooking/FelpBooking
+        ├── about.html            # About page
+        ├── home.html             # Home page
+        ├── home.css              # Home page styles
+        ├── app.js                # Main JS for interactivity and API calls
+        ├── app.css               # Main CSS styles
+        ├── styles.css            # Shared/global styles
+        ├── style2.css            # Additional styles
+        ├── tailwind.config.js    # Tailwind CSS configuration
+        ├── felp-ai-universal.js  # Shared JS logic (Felp AI loader)
+        ├── t&c.html              # Terms & conditions
+        ├── legal.html            # Legal information
+        ├── policy.html           # Privacy policy
+        ├── signin.html           # Sign-in page
+        ├── register.html         # Registration page
+        ├── profile.html          # User profile page
+        ├── Untitled.html         # Spare/test page
+        ├── js/                   # Client JS helpers
+        │   ├── loading-enhancer.js
+        │   └── config.js
+        └── assest/               # Images, icons, and other static files
+            └── public/
+                └── icons/
+                    ├── Union-1.png
+                    └── Group.png
         </code></pre>
 
     <h3>Key Architectural Patterns</h3>
@@ -1443,8 +1449,8 @@ Types:
     </section>
 
     <footer style="text-align: center; margin-top: 50px; padding: 20px; border-top: 1px solid var(--border-color); color: #666;">
-        <p><strong>Felp Pets Technical Specification v1.0.0</strong></p>
-        <p>This document serves as the technical specification for Felp Pets.</p>
+        <p><strong>FelpBooking Technical Specification v1.0.0</strong></p>
+        <p>This document serves as the technical specification for FelpBooking.</p>
         <p>Last updated: September 19, 2025</p>
     </footer>
 </body>

@@ -1,0 +1,1458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Felp Pets Technical Specification</title>
+    <style>
+        :root {
+            --primary-color: #000000;
+            --secondary-color: #FFD687;
+            --text-color: #333333;
+            --background-color: #ffffff;
+            --code-bg: #f8f8f8;
+            --border-color: #e0e0e0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            font-size: 2em;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin-top: 40px;
+        }
+
+        h3 {
+            color: var(--primary-color);
+            font-size: 1.5em;
+            margin-top: 30px;
+        }
+
+        h4 {
+            color: #555;
+            font-size: 1.2em;
+            margin-top: 20px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .tech-stack {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .tech-item {
+            background: var(--code-bg);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .tech-item h4 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+
+        code {
+            background: var(--code-bg);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+        }
+
+        pre {
+            background: var(--code-bg);
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid var(--border-color);
+        }
+
+        .api-endpoint {
+            background: #f0f8ff;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 6px;
+            border-left: 4px solid #007acc;
+        }
+
+        .method {
+            font-weight: bold;
+            color: #007acc;
+        }
+
+        .endpoint {
+            font-family: monospace;
+            color: #d73a49;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background: var(--code-bg);
+            font-weight: 600;
+        }
+
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .feature-item {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .feature-item h4 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+
+        .architecture-diagram {
+            text-align: center;
+            margin: 30px 0;
+            font-style: italic;
+            color: #666;
+        }
+
+        .code-example {
+            background: var(--code-bg);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 1px solid var(--border-color);
+        }
+
+        .highlight {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+
+        .security-note {
+            background: #f8d7da;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 4px solid #dc3545;
+            margin: 20px 0;
+        }
+
+        .performance-tip {
+            background: #d1ecf1;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 4px solid #17a2b8;
+            margin: 20px 0;
+        }
+
+        /* Navigation Menu Styles */
+        .nav-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow-x: auto;
+        }
+
+        .nav-menu h1 {
+            margin: 0;
+            font-size: 1.5em;
+            color: var(--secondary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            white-space: nowrap;
+        }
+
+        .nav-links a:hover {
+            background-color: rgba(255, 214, 133, 0.2);
+        }
+
+        /* Adjust body padding to account for fixed nav */
+        body {
+            padding-top: 80px;
+        }
+
+        /* Smooth scrolling with offset for fixed header */
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 90px; /* Account for fixed header height + some padding */
+        }
+
+        /* Alternative approach for older browsers */
+        .section {
+            scroll-margin-top: 90px; /* This ensures proper spacing when scrolling to anchors */
+        }
+
+        @media (max-width: 768px) {
+            .tech-stack, .feature-list {
+                grid-template-columns: 1fr;
+            }
+
+            body {
+                padding: 90px 10px 10px 10px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            .nav-menu {
+                padding: 10px;
+            }
+
+            .nav-links {
+                gap: 10px;
+                font-size: 0.9em;
+            }
+
+            .nav-links a {
+                padding: 4px 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Menu -->
+    <nav class="nav-menu">
+        <h1>Felp Pets Technical Specification</h1>
+        <div class="nav-links">
+            <a href="#overview">Overview</a>
+            <a href="#architecture">Architecture</a>
+            <a href="#backend">Backend</a>
+            <a href="#frontend">Frontend</a>
+            <a href="#database">Database</a>
+            <a href="#api">API</a>
+            <a href="#features">Features</a>
+            <a href="#guidelines">Guidelines</a>
+            <a href="#deployment">Deployment</a>
+            <a href="#monitoring">Monitoring</a>
+            <a href="#testing">Testing</a>
+            <a href="#scalability">Scalability</a>
+            <a href="#workflow">Workflow</a>
+        </div>
+    </nav>
+
+    <header>
+        <h1>Felp Pets Technical Specification</h1>
+        <p><strong>Version:</strong> 1.0.0 | <strong>Last Updated:</strong> September 19, 2025</p>
+        <p><em>A comprehensive technical specification for Felp Pets with HTML/JS frontend and Python-Fast API backend</em></p>
+    </header>
+
+    <section id="overview" class="section">
+        <h2>1. Project Overview</h2>
+        <p>
+        This project is a modern full-stack web application that utilizes a 
+        <strong>HTML/JavaScript/CSS</strong> frontend for the user interface and a 
+        <strong>Python FastAPI</strong> backend for server-side processing. 
+        The system is designed to deliver a lightweight yet robust platform that supports 
+        <em>content management</em>, <em>secure user authentication</em>, and 
+        <em>data-driven functionality</em>. 
+        Additionally, the backend integrates <strong>AI-powered capabilities</strong> 
+        to enhance decision-making and provide intelligent features.
+        </p>
+
+        <div class="highlight">
+            <strong>Key Business Goals:</strong>
+            <ul>
+                <li>Deliver a scalable web solution for content exploration and management</li>
+                <li>Implement robust user login, authentication, and access control</li>
+                <li>Facilitate user-contributed content creation and feedback</li>
+                <li>Incorporate AI/ML features to improve overall user interaction</li>
+                <li>Accommodate diverse content formats with flexible categorization</li>
+                <li>Offer a full-featured administrative dashboard for content oversight</li>
+            </ul>
+
+        </div>
+    </section>
+
+    <section id="architecture" class="section">
+        <h2>2. System Architecture</h2>
+
+        <h3>High-Level Architecture</h3>
+        <div class="architecture-diagram">
+            [Frontend (HTML/CSS/JavaScript)] ← HTTP/REST → [Backend (Python FastAPI)] ← Database Driver → [Database]<br>
+            ↑<br>
+            [AI/ML Services (OpenAI)]<br>
+            ↑<br>
+            [File Storage (Local/Cloud)]
+        </div>
+
+        <h3>Technology Stack Overview</h3>
+        <div class="tech-stack">
+            <div class="tech-item">
+                <h4>Frontend</h4>
+                <ul>
+                    <li><strong>Languages:</strong> HTML5, CSS3, JavaScript (ES6+)</li>
+                    <li><strong>Structure:</strong> Organized by feature/module in folders:
+                        <ul>
+                            <li><code>pet/pet/</code>: Main user-facing pages (home, about, profile, register, signin, legal, policy, t&c), CSS, JS, assets</li>
+                            <li><code>static/images/profiles/</code>: Profile images and other static assets</li>
+                        </ul>
+                    </li>
+                    <li><strong>Styling:</strong> Custom CSS and Tailwind CSS for responsive design</li>
+                    <li><strong>JavaScript:</strong> Modular JS files for interactivity, API calls, and UI logic</li>
+                    <li><strong>Navigation:</strong> Static routing via anchor tags between HTML pages</li>
+                    <li><strong>Assets:</strong> Images, icons, and other static files organized in <code>assets/</code> and <code>static/</code></li>
+                    <li><strong>API Integration:</strong> Fetch/Axios for communication with FastAPI backend</li>
+                    <li><strong>Authentication:</strong> JWT token management in localStorage/sessionStorage</li>
+                    <li><strong>Accessibility & SEO:</strong> Semantic HTML, ARIA attributes, and meta tags</li>
+                </ul>
+            </div>
+
+            <div class="tech-item">
+                <h4>Backend</h4>
+                <ul>
+                    <li><strong>Runtime:</strong> Python 3.12+</li>
+                    <li><strong>Framework:</strong> FastAPI (for RESTful APIs)</li>
+                    <li><strong>Database:</strong> SQL Server (Relational Database)</li>
+                    <li><strong>Authentication:</strong> JWT with OAuth2 and password hashing (bcrypt)</li>
+                    <li><strong>File Handling:</strong> FastAPI UploadFile & Streaming</li>
+                    <li><strong>CORS:</strong> Configurable via FastAPI Middleware</li>
+                    <li><strong>Validation:</strong> Pydantic models for request/response validation</li>
+                    <li><strong>Error Handling:</strong> Exception handlers in FastAPI</li>
+                </ul>
+            </div>
+        </div>
+
+
+            <div class="tech-item">
+            <h4>AI & External Services</h4>
+            <ul>
+                <li><strong>OpenAI:</strong> GPT models for enhanced search and chat (Python SDK)</li>
+                <li><strong>FastAPI:</strong> OpenAPI specification & Swagger UI</li>
+                <li><strong>Embedding Services:</strong> AI-powered content embeddings (Python)</li>
+                <li><strong>Speech Services:</strong> Text-to-speech and speech recognition (Python)</li>
+                <li><strong>JWT/OAuth2:</strong> Secure authentication for API integrations</li>
+            </ul>
+        </div>
+
+            <div class="tech-item">
+                            <h4>Development Tools</h4>
+                            <ul>
+                                <li><strong>Package Manager:</strong> pip</li>
+                                <li><strong>Environment Management:</strong> venv (Python Virtual Environment)</li>
+                                <li><strong>Process Manager / Server:</strong> Uvicorn (ASGI server for FastAPI)</li>
+                                <li><strong>Code Linting & Style:</strong> flake8, black, isort</li>
+                                <li><strong>Build / Dependency Tools:</strong> requirements.txt</li>
+                                <li><strong>Testing:</strong> pytest</li>
+                                <li><strong>Configuration:</strong> python-dotenv for environment variables</li>
+                                <li><strong>Debugging:</strong> VS Code Python debugger</li>
+                            </ul>
+            </div>
+        </div>
+
+        <h3>AI & Machine Learning Integration</h3>
+                <h4>OpenAI Integration</h4>
+                <ul>
+                    <li><strong>GPT Models:</strong> Natural language processing for search and chat (Python SDK)</li>
+                    <li><strong>Contextual Understanding:</strong> Semantic search using conversation history</li>
+                    <li><strong>Query Enhancement:</strong> Query rewriting and expansion via AI</li>
+                    <li><strong>Response Generation:</strong> Dynamic content recommendations</li>
+                    <li><strong>API Rate Management:</strong> Token usage tracking and limits (Python)</li>
+                </ul>
+
+                <h4>Embedding & Vector Search</h4>
+                <ul>
+                    <li><strong>Content Embeddings:</strong> AI-generated vector representations (OpenAI or Python libraries)</li>
+                    <li><strong>Semantic Similarity:</strong> Meaning-based content matching</li>
+                    <li><strong>Search Optimization:</strong> Fast vector similarity searches (Python)</li>
+                    <li><strong>Batch Processing:</strong> Automated embedding generation for new content</li>
+                    <li><strong>Indexing Strategy:</strong> Optimized vector database operations (MongoDB, Python)</li>
+                </ul>
+
+                <h3>Real-time Features & WebSockets</h3>
+
+                <h4>WebSocket Implementation</h4>
+                <ul>
+                    <li><strong>Bidirectional Communication:</strong> Real-time client-server messaging (FastAPI WebSockets)</li>
+                    <li><strong>Room Management:</strong> Channel-based communication (Python)</li>
+                    <li><strong>Connection Handling:</strong> Automatic reconnection and error recovery (custom logic)</li>
+                    <li><strong>Authentication:</strong> JWT-based WebSocket authentication</li>
+                    <li><strong>Scalability:</strong> Redis or other adapters for multi-instance deployment (if used)</li>
+                </ul>
+
+                <h4>Live Updates & Notifications</h4>
+                <ul>
+                    <li><strong>Content Updates:</strong> Real-time content changes broadcasting (FastAPI WebSockets)</li>
+                    <li><strong>User Activity:</strong> Live user presence and activity indicators</li>
+                    <li><strong>Admin Notifications:</strong> Real-time admin dashboard updates</li>
+                    <li><strong>Chat Systems:</strong> Real-time messaging capabilities</li>
+                    <li><strong>Event Broadcasting:</strong> Live event notifications and updates</li>
+                </ul>
+    </section>
+
+   <section id="backend" class="section">
+    <h2>3. Backend Architecture</h2>
+
+    <h3>Project Structure</h3>
+    <pre><code>backend/
+├── app/
+│   ├── main.py           # FastAPI entry point
+│   ├── config/           # Configuration files (JWT, SQL Server, etc.)
+│   ├── models/           # SQLAlchemy models (User, Content, etc.)
+│   ├── routers/          # API route definitions
+│   ├── services/         # Business logic services (chat, project, etc.)
+│   ├── utils/            # Utility functions (auth, helpers)
+│   └── static/           # Static files (images, uploads)
+</code></pre>
+
+    <h3>Core Components</h3>
+
+    <h4>Authentication & Authorization</h4>
+    <ul>
+        <li><strong>JWT-based authentication</strong> with Bearer token scheme (FastAPI + PyJWT)</li>
+        <li><strong>Role-based access control</strong> (user, admin)</li>
+        <li><strong>Password hashing</strong> using bcrypt</li>
+        <li><strong>Dependency injection:</strong> FastAPI Depends for auth and authorization</li>
+    </ul>
+
+    <h4>API Structure</h4>
+    <p>The API follows RESTful conventions with structured routing using FastAPI routers and dependency injection.</p>
+
+    <h4>Middleware Architecture</h4>
+    <ul>
+        <li><strong>CORS Middleware:</strong> Configurable cross-origin resource sharing (FastAPI)</li>
+        <li><strong>Authentication Middleware:</strong> JWT token verification with role-based access</li>
+        <li><strong>Optional Auth Dependency:</strong> Non-blocking authentication for public endpoints</li>
+        <li><strong>Admin Dependency:</strong> Role-based authorization guards</li>
+        <li><strong>Error Handling:</strong> Exception handlers in FastAPI</li>
+        <li><strong>File Upload:</strong> FastAPI UploadFile for file handling</li>
+    </ul>
+
+    <h4>API Endpoints</h4>
+    <div class="api-endpoint">
+        <span class="method">GET</span> <span class="endpoint">/api/health</span> - Application health check
+    </div>
+    <div class="api-endpoint">
+        <span class="method">POST</span> <span class="endpoint">/api/auth/login</span> - User login
+    </div>
+    <div class="api-endpoint">
+        <span class="method">POST</span> <span class="endpoint">/api/auth/register</span> - User registration
+    </div>
+    <div class="api-endpoint">
+        <span class="method">GET</span> <span class="endpoint">/api/auth/profile</span> - Get user profile
+    </div>
+    <div class="api-endpoint">
+        <span class="method">POST</span> <span class="endpoint">/api/chat/send</span> - Send chat message
+    </div>
+    <div class="api-endpoint">
+        <span class="method">GET</span> <span class="endpoint">/api/chat/history</span> - Get chat history
+    </div>
+    <div class="api-endpoint">
+        <span class="method">GET</span> <span class="endpoint">/api/projects</span> - List projects
+    </div>
+    <div class="api-endpoint">
+        <span class="method">POST</span> <span class="endpoint">/api/projects</span> - Create project
+    </div>
+    <div class="api-endpoint">
+        <span class="method">GET</span> <span class="endpoint">/api/chatbot</span> - Chatbot AI endpoint
+    </div>
+    <div class="api-endpoint">
+        <span class="method">GET</span> <span class="endpoint">/static/images/profiles/{filename}</span> - Serve profile images
+    </div>
+
+    <h4> Key Routes</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>Method</th>
+                <th>Route</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>GET</td><td>/health</td><td>Service health check</td></tr>
+            <tr><td>GET</td><td>/</td><td>Root endpoint (service info)</td></tr>
+            <tr><td>GET</td><td>/config/frontend</td><td>Get frontend configuration</td></tr>
+            <tr><td>GET</td><td>/config/projects</td><td>Get available projects configuration</td></tr>
+            <tr><td>GET</td><td>/projects/</td><td>List all projects</td></tr>
+            <tr><td>GET</td><td>/projects/{project_id}</td><td>Get details for a specific project</td></tr>
+            <tr><td>POST</td><td>/projects/reload</td><td>Reload project configurations</td></tr>
+            <tr><td>GET</td><td>/projects/{project_id}/prompt</td><td>Get AI prompt for a project</td></tr>
+            <tr><td>GET</td><td>/chatbot/</td><td>Serve chatbot test interface (HTML)</td></tr>
+            <tr><td>GET</td><td>/chatbot/assets/{filename}</td><td>Serve chatbot static assets</td></tr>
+            <tr><td>POST</td><td>/chatbot/start</td><td>Start chatbot session</td></tr>
+            <tr><td>POST</td><td>/chatbot/answer</td><td>Submit answer to chatbot question</td></tr>
+            <tr><td>POST</td><td>/chatbot/status</td><td>Get chatbot session status</td></tr>
+            <tr><td>GET</td><td>/chatbot/saved-answers</td><td>Get previously saved registration answers</td></tr>
+            <tr><td>POST</td><td>/chat/message</td><td>Send chat message (AI response)</td></tr>
+            <tr><td>GET</td><td>/chat/history</td><td>Get user's chat history</td></tr>
+            <tr><td>POST</td><td>/chat/search</td><td>Search user's chats (POST)</td></tr>
+            <tr><td>GET</td><td>/chat/search</td><td>Search user's chats (GET)</td></tr>
+            <tr><td>GET</td><td>/chat/ids</td><td>Get all chat IDs for a user</td></tr>
+            <tr><td>GET</td><td>/chat/latest</td><td>Get user's latest chat session</td></tr>
+            <tr><td>GET</td><td>/chat/{chat_id}</td><td>Get specific chat session by ID</td></tr>
+        </tbody>
+    </table>
+</section>
+
+  <section id="frontend" class="section">
+    <h2>4. Frontend Architecture</h2>
+
+    <h3>Project Structure</h3>
+    <pre><code>frontend/
+    ├── PetsShop/PetsShop
+    ├── about.html             # About page
+    ├── home.html              # Home page
+    ├── home.css               # Home page styles
+    ├── app.js                 # Main JS for interactivity and API calls
+    ├── app.css                # Main CSS styles
+    ├── styles.css             # Shared/global styles
+    ├── style2.css             # Additional styles
+    ├── tailwind.config.js     # Tailwind CSS configuration
+    ├── felp-ai-universal.js   # Shared JS logic (Felp AI loader)
+    ├── t&c.html               # Terms & conditions
+    ├── legal.html             # Legal information
+    ├── policy.html            # Privacy policy
+    ├── signin.html            # Sign-in page
+    ├── register.html          # Registration page
+    ├── profile.html           # User profile page
+    ├── Untitled.html          # Spare/test page
+    ├── js/                    # Client JS helpers
+    │   ├── loading-enhancer.js
+    │   └── config.js
+    └── assest/                # Images and other static files
+        └── public/
+            └── img/
+                ├── blue-brush.png
+                └── bg.jpg
+                └── (other images)
+        </code></pre>
+
+    <h3>Key Architectural Patterns</h3>
+
+    <h4>Frontend Structure</h4>
+    <ul>
+        <li><strong>Pages:</strong> HTML files for each main view (home, about, profile, etc.)</li>
+        <li><strong>Styling:</strong> CSS files with custom styles and optional Tailwind CSS</li>
+        <li><strong>JavaScript:</strong> JS files for interactivity, API calls, and DOM manipulation</li>
+        <li><strong>Assets:</strong> Images, icons, and other static resources</li>
+        <li><strong>Reusable Elements:</strong> Shared CSS classes and JS functions in <code>components/</code></li>
+    </ul>
+
+    <h4>Routing & Navigation</h4>
+    <ul>
+        <li><strong>Page Navigation:</strong> Standard anchor links between HTML pages</li>
+        <li><strong>Dynamic Content:</strong> JavaScript-driven updates and modals</li>
+        <li><strong>SEO Optimization:</strong> Semantic HTML, meta tags, and structured content</li>
+    </ul>
+
+    <h4>Service Layer Architecture</h4>
+    <ul>
+        <li><strong>API Calls:</strong> Fetch API or Axios for backend communication</li>
+        <li><strong>Error Handling:</strong> JavaScript try/catch with user-friendly messages</li>
+        <li><strong>Authentication:</strong> JWT token management in <code>localStorage</code> or <code>sessionStorage</code></li>
+        <li><strong>Reusability:</strong> Centralized service functions for consistent API interaction</li>
+    </ul>
+</section>
+
+
+    <section id="database" class="section">
+        <h2>5. Database Schema</h2>
+
+        <h3>Core Models</h3>
+
+       <!-- BBD_ERROR_LOG -->
+<h2>BBD_ERROR_LOG</h2>
+<table>
+    <tr><th>ColumnName</th><th>DataType</th><th>MaxLength</th><th>IsNullable</th><th>IsIdentity</th></tr>
+    <tr><td>Id</td><td>int</td><td>4</td><td>0</td><td>1</td></tr>
+    <tr><td>TableName</td><td>varchar</td><td>100</td><td>1</td><td>0</td></tr>
+    <tr><td>ProcedureName</td><td>varchar</td><td>100</td><td>1</td><td>0</td></tr>
+    <tr><td>ErrorMessage</td><td>varchar</td><td>-1</td><td>1</td><td>0</td></tr>
+    <tr><td>ErrorDateTime</td><td>datetime</td><td>8</td><td>1</td><td>0</td></tr>
+</table>
+
+<!-- BBD_POSTAPI_LOG -->
+<h2>BBD_POSTAPI_LOG</h2>
+<table>
+    <tr><th>ColumnName</th><th>DataType</th><th>MaxLength</th><th>IsNullable</th><th>IsIdentity</th></tr>
+    <tr><td>Id</td><td>int</td><td>4</td><td>0</td><td>1</td></tr>
+    <tr><td>MODULE_NAME</td><td>varchar</td><td>200</td><td>1</td><td>0</td></tr>
+    <tr><td>SP_NAME</td><td>varchar</td><td>200</td><td>1</td><td>0</td></tr>
+    <tr><td>TASK_NAME</td><td>varchar</td><td>200</td><td>1</td><td>0</td></tr>
+    <tr><td>SQL_STRING</td><td>varchar</td><td>-1</td><td>1</td><td>0</td></tr>
+    <tr><td>DOCUMENT_PATH</td><td>varchar</td><td>-1</td><td>1</td><td>0</td></tr>
+    <tr><td>POST_OBJECT</td><td>varchar</td><td>-1</td><td>1</td><td>0</td></tr>
+    <tr><td>API_CRDATE</td><td>datetime</td><td>8</td><td>1</td><td>0</td></tr>
+    <tr><td>err_msg</td><td>varchar</td><td>-1</td><td>1</td><td>0</td></tr>
+    <tr><td>API_COMPL_DTTIME</td><td>datetime</td><td>8</td><td>1</td><td>0</td></tr>
+    <tr><td>API_RESPONSE_TIME</td><td>time</td><td>5</td><td>1</td><td>0</td></tr>
+</table>
+<!-- BBD_POSTAPI_LOG_ARCH -->
+<h2>BBD_POSTAPI_LOG_ARCH</h2>
+<table>
+    <tr><th>ColumnName</th><th>DataType</th><th>MaxLength</th><th>IsNullable</th><th>IsIdentity</th></tr>
+    <tr><td>Id</td><td>int</td><td>4</td><td>0</td><td>1</td></tr>
+    <tr><td>MODULE_NAME</td><td>varchar</td><td>200</td><td>1</td><td>0</td></tr>
+    <tr><td>SP_NAME</td><td>varchar</td><td>200</td><td>1</td><td>0</td></tr>
+    <tr><td>TASK_NAME</td><td>varchar</td><td>200</td><td>1</td><td>0</td></tr>
+    <tr><td>SQL_STRING</td><td>varchar</td><td>-1</td><td>1</td><td>0</td></tr>
+    <tr><td>DOCUMENT_PATH</td><td>varchar</td><td>-1</td><td>1</td><td>0</td></tr>
+    <tr><td>POST_OBJECT</td><td>varchar</td><td>-1</td><td>1</td><td>0</td></tr>
+    <tr><td>API_CRDATE</td><td>datetime</td><td>8</td><td>1</td><td>0</td></tr>
+    <tr><td>err_msg</td><td>varchar</td><td>-1</td><td>1</td><td>0</td></tr>
+    <tr><td>API_COMPL_DTTIME</td><td>datetime</td><td>8</td><td>1</td><td>0</td></tr>
+    <tr><td>API_RESPONSE_TIME</td><td>time</td><td>5</td><td>1</td><td>0</td></tr>
+</table>
+
+<!-- BBM_COMMON_API -->
+<h2>BBM_COMMON_API</h2>
+<table>
+    <tr><th>ColumnName</th><th>DataType</th><th>MaxLength</th><th>IsNullable</th><th>IsIdentity</th></tr>
+    <tr><td>ID</td><td>int</td><td>4</td><td>0</td><td>1</td></tr>
+    <tr><td>API_NAME</td><td>varchar</td><td>200</td><td>0</td><td>0</td></tr>
+    <tr><td>API_PATH</td><td>varchar</td><td>500</td><td>0</td><td>0</td></tr>
+    <tr><td>API_TYPE</td><td>varchar</td><td>50</td><td>1</td><td>0</td></tr>
+    <tr><td>CREATED_ON</td><td>datetime</td><td>8</td><td>0</td><td>0</td></tr>
+</table>
+
+<!-- SSO_PROJECT_MST -->
+<h2>SSO_PROJECT_MST</h2>
+<table>
+    <tr><th>ColumnName</th><th>DataType</th><th>MaxLength</th><th>IsNullable</th><th>IsIdentity</th></tr>
+    <tr><td>PROJECT_ID</td><td>int</td><td>4</td><td>0</td><td>1</td></tr>
+    <tr><td>PROJECT_NAME</td><td>varchar</td><td>200</td><td>0</td><td>0</td></tr>
+    <tr><td>PROJECT_DESC</td><td>varchar</td><td>500</td><td>1</td><td>0</td></tr>
+    <tr><td>PROJECT_STATUS</td><td>int</td><td>4</td><td>0</td><td>0</td></tr>
+    <tr><td>CREATED_DATE</td><td>datetime</td><td>8</td><td>0</td><td>0</td></tr>
+</table>
+
+<!-- SSO_USER_MST -->
+<h2>SSO_USER_MST</h2>
+<table>
+    <tr><th>ColumnName</th><th>DataType</th><th>MaxLength</th><th>IsNullable</th><th>IsIdentity</th></tr>
+    <tr><td>USER_ID</td><td>int</td><td>4</td><td>0</td><td>1</td></tr>
+    <tr><td>USERNAME</td><td>varchar</td><td>150</td><td>0</td><td>0</td></tr>
+    <tr><td>PASSWORD</td><td>varchar</td><td>200</td><td>0</td><td>0</td></tr>
+    <tr><td>EMAIL</td><td>varchar</td><td>200</td><td>1</td><td>0</td></tr>
+    <tr><td>CREATED_ON</td><td>datetime</td><td>8</td><td>0</td><td>0</td></tr>
+</table>
+
+<!-- SSO_USER_PROJECTS -->
+<h2>SSO_USER_PROJECTS</h2>
+<table>
+    <tr><th>ColumnName</th><th>DataType</th><th>MaxLength</th><th>IsNullable</th><th>IsIdentity</th></tr>
+    <tr><td>ID</td><td>int</td><td>4</td><td>0</td><td>1</td></tr>
+    <tr><td>USER_ID</td><td>int</td><td>4</td><td>0</td><td>0</td></tr>
+    <tr><td>PROJECT_ID</td><td>int</td><td>4</td><td>0</td><td>0</td></tr>
+    <tr><td>ASSIGNED_DATE</td><td>datetime</td><td>8</td><td>0</td><td>0</td></tr>
+</table>
+
+<!-- CHAT_TRAN -->
+<h2>CHAT_TRAN</h2>
+<table>
+    <tr><th>ColumnName</th><th>DataType</th><th>MaxLength</th><th>IsNullable</th><th>IsIdentity</th></tr>
+    <tr><td>CHAT_IDNO</td><td>int</td><td>4</td><td>0</td><td>1</td></tr>
+    <tr><td>USER_ID</td><td>int</td><td>4</td><td>0</td><td>0</td></tr>
+    <tr><td>MESSAGE</td><td>varchar</td><td>-1</td><td>0</td><td>0</td></tr>
+    <tr><td>TIMESTAMP</td><td>datetime</td><td>8</td><td>0</td><td>0</td></tr>
+</table>
+
+<!-- SSO_USER_LOGIN_LOG -->
+<h2>SSO_USER_LOGIN_LOG</h2>
+<table>
+    <tr><th>ColumnName</th><th>DataType</th><th>MaxLength</th><th>IsNullable</th><th>IsIdentity</th></tr>
+    <tr><td>LOGIN_ID</td><td>int</td><td>4</td><td>0</td><td>1</td></tr>
+    <tr><td>USER_ID</td><td>int</td><td>4</td><td>0</td><td>0</td></tr>
+    <tr><td>LOGIN_TIME</td><td>datetime</td><td>8</td><td>0</td><td>0</td></tr>
+    <tr><td>LOGOUT_TIME</td><td>datetime</td><td>8</td><td>1</td><td>0</td></tr>
+    <tr><td>STATUS</td><td>varchar</td><td>50</td><td>1</td><td>0</td></tr>
+</table>
+
+<!-- Repeat the same pattern for remaining tables like SSO_BUSINESS_WORKING_HOURS, BBD_ERROR_LOG, etc. -->
+
+</body>
+
+        <h3>SQL Server & SQLAlchemy Implementation</h3>
+
+        <h4>Database Architecture</h4>
+        <ul>
+            <li><strong>SQLAlchemy ORM:</strong> Python-first schema definitions with validation</li>
+            <li><strong>Schema Design:</strong> Relational tables and foreign key relationships</li>
+            <li><strong>Migration Tools:</strong> Alembic for schema migrations</li>
+            <li><strong>Indexing Strategy:</strong> Optimized queries with SQL indexes</li>
+            <li><strong>Stored Procedures:</strong> For complex business logic (optional)</li>
+        </ul>
+
+        <h4>Data Relationships & Population</h4>
+        <ul>
+            <li><strong>Foreign Key Relationships:</strong> SQLAlchemy relationships and joins</li>
+            <li><strong>Related Tables:</strong> Separate tables for galleries, tags, attributes, etc.</li>
+            <li><strong>Query Optimization:</strong> Efficient joins and eager loading</li>
+            <li><strong>Cascade Operations:</strong> Referential integrity management</li>
+        </ul>
+
+        <h4>Data Validation & Sanitization</h4>
+        <ul>
+            <li><strong>Schema Validation:</strong> Pydantic models for request/response</li>
+            <li><strong>Type Safety:</strong> Python type hints and SQLAlchemy models</li>
+            <li><strong>Unique Constraints:</strong> Database-level uniqueness enforcement</li>
+            <li><strong>Required Fields:</strong> Mandatory data validation</li>
+        </ul>
+
+        <h3>Attribute Models (Dynamic Configuration)</h3>
+        <p>The system uses dynamic attributes for flexible categorization and content classification:</p>
+        <ul>
+            <li><strong>Category:</strong> Content classification and organization</li>
+            <li><strong>Tags:</strong> Flexible tagging system for content discovery</li>
+            <li><strong>Attributes:</strong> Custom properties specific to content types</li>
+            <li><strong>Status:</strong> Content publication and moderation states</li>
+            <li><strong>Priority:</strong> Content ranking and display priority</li>
+        </ul>
+    </section>
+
+    <section id="api" class="section">
+        <h2>6. API Documentation Structure</h2>
+
+        <h3>API Design Patterns</h3>
+
+        <h4>RESTful API Conventions</h4>
+        <ul>
+            <li><strong>HTTP Methods:</strong> Standard GET, POST, PUT, DELETE operations</li>
+            <li><strong>Resource Naming:</strong> Plural nouns for collections, consistent naming</li>
+            <li><strong>Query Parameters:</strong> Filtering, sorting, pagination support</li>
+            <li><strong>HTTP Status Codes:</strong> Proper status code usage (200, 201, 400, 401, 404, 500)</li>
+            <li><strong>Content Negotiation:</strong> JSON responses with proper content-type headers</li>
+        </ul>
+
+        <h4>API Response Format</h4>
+        <div class="code-example">
+            <h4>Success Response</h4>
+            <pre><code>{
+  "success": true,
+  "data": { /* payload */ },
+  "message": "Operation successful"
+}</code></pre>
+        </div>
+
+        <div class="code-example">
+            <h4>Error Response</h4>
+            <pre><code>{
+  "success": false,
+  "message": "Error description",
+  "error": "Detailed error information"
+}</code></pre>
+        </div>
+
+        <h4>Authentication Headers</h4>
+        <pre><code>Authorization: Bearer &lt;jwt_token&gt;
+Content-Type: application/json
+X-API-Key: &lt;api_key&gt; (for admin operations)</code></pre>
+
+        <h4>Pagination & Filtering</h4>
+        <ul>
+            <li><strong>Query Parameters:</strong> page, limit, sort, filter, search</li>
+            <li><strong>Response Metadata:</strong> total, page, limit, hasNext, hasPrev</li>
+            <li><strong>Search Queries:</strong> Full-text search with regex and indexing</li>
+            <li><strong>Advanced Filtering:</strong> Multiple field filters with operators</li>
+            <li><strong>Sorting Options:</strong> Ascending/descending by multiple fields</li>
+        </ul>
+
+        <h3>Data Flow & Service Architecture</h3>
+
+        <h4>Frontend-Backend Communication</h4>
+        <ul>
+            <li><strong>API Service Layer:</strong> Centralized service functions for all API calls</li>
+            <li><strong>Request/Response Interceptors:</strong> Global request handling and error processing</li>
+            <li><strong>Authentication Flow:</strong> Automatic token management and refresh</li>
+            <li><strong>Error Boundaries:</strong> Graceful error handling and user feedback</li>
+            <li><strong>Loading States:</strong> Optimistic updates and loading indicators</li>
+        </ul>
+
+        <h4>State Management Flow</h4>
+        <ul>
+            <li><strong>Server State:</strong> API responses cached and synchronized</li>
+            <li><strong>Client State:</strong> UI state managed through React Context</li>
+            <li><strong>Persistence:</strong> localStorage for authentication and preferences</li>
+            <li><strong>Real-time Updates:</strong> WebSocket integration for live data</li>
+            <li><strong>Optimistic Updates:</strong> Immediate UI feedback with rollback on errors</li>
+        </ul>
+
+        <h4>Admin Panel Architecture</h4>
+        <ul>
+            <li><strong>Protected Routes:</strong> Role-based access control for admin features</li>
+            <li><strong>CRUD Operations:</strong> Generic components for content management</li>
+            <li><strong>Real-time Monitoring:</strong> Live updates for content moderation</li>
+            <li><strong>Bulk Operations:</strong> Batch processing for multiple items</li>
+            <li><strong>Audit Logging:</strong> Comprehensive action tracking and logging</li>
+        </ul>
+
+        <h3>Key API Endpoints</h3>
+
+    <h4>Authentication</h4>
+    <div class="api-endpoint">
+        <span class="method">POST</span> <span class="endpoint">/api/auth/register</span> - User registration
+    </div>
+    <div class="api-endpoint">
+        <span class="method">POST</span> <span class="endpoint">/api/auth/login</span> - User login
+    </div>
+    <div class="api-endpoint">
+        <span class="method">GET</span> <span class="endpoint">/api/auth/profile</span> - Get user profile
+    </div>
+
+    <h4>Projects</h4>
+    <div class="api-endpoint">
+        <span class="method">GET</span> <span class="endpoint">/projects/</span> - List all projects
+    </div>
+    <div class="api-endpoint">
+        <span class="method">GET</span> <span class="endpoint">/projects/{project_id}</span> - Get details for a specific project
+    </div>
+    <div class="api-endpoint">
+        <span class="method">POST</span> <span class="endpoint">/projects/reload</span> - Reload project configurations
+    </div>
+    <div class="api-endpoint">
+        <span class="method">GET</span> <span class="endpoint">/projects/{project_id}/prompt</span> - Get AI prompt for a project
+    </div>
+
+    <h4>Chatbot / Real-time Features</h4>
+    <div class="api-endpoint">
+        <span class="method">GET</span> <span class="endpoint">/chatbot/</span> - Serve chatbot test interface (HTML)
+    </div>
+    <div class="api-endpoint">
+        <span class="method">GET</span> <span class="endpoint">/chatbot/assets/{filename}</span> - Serve chatbot static assets
+    </div>
+    <div class="api-endpoint">
+        <span class="method">POST</span> <span class="endpoint">/chatbot/start</span> - Start chatbot session
+    </div>
+    <div class="api-endpoint">
+        <span class="method">POST</span> <span class="endpoint">/chatbot/answer</span> - Submit answer to chatbot question
+    </div>
+    <div class="api-endpoint">
+        <span class="method">POST</span> <span class="endpoint">/chatbot/status</span> - Get chatbot session status
+    </div>
+    <div class="api-endpoint">
+        <span class="method">GET</span> <span class="endpoint">/chatbot/saved-answers</span> - Get previously saved registration answers
+    </div>
+    <div class="api-endpoint">
+        <span class="method">POST</span> <span class="endpoint">/chat/message</span> - Send chat message (AI response)
+    </div>
+    <div class="api-endpoint">
+        <span class="method">GET</span> <span class="endpoint">/chat/history</span> - Get user's chat history
+    </div>
+    <div class="api-endpoint">
+        <span class="method">POST</span> <span class="endpoint">/chat/search</span> - Search user's chats (POST)
+    </div>
+    <div class="api-endpoint">
+        <span class="method">GET</span> <span class="endpoint">/chat/search</span> - Search user's chats (GET)
+    </div>
+    <div class="api-endpoint">
+        <span class="method">GET</span> <span class="endpoint">/chat/ids</span> - Get all chat IDs for a user
+    </div>
+    <div class="api-endpoint">
+        <span class="method">GET</span> <span class="endpoint">/chat/latest</span> - Get user's latest chat session
+    </div>
+    <div class="api-endpoint">
+        <span class="method">GET</span> <span class="endpoint">/chat/{chat_id}</span> - Get specific chat session by ID
+    </div>
+</section>
+
+ <section id="features" class="section">
+        <h2>7. Key Features</h2>
+
+        <div class="feature-list">
+            <div class="feature-item">
+                <h4>AI-Powered Search</h4>
+                <p>Advanced search capabilities using OpenAI for natural language queries and personalized recommendations.</p>
+                <ul>
+                    <li>Semantic search understanding</li>
+                    <li>Context-aware filtering</li>
+                    <li>Intelligent content discovery</li>
+                </ul>
+            </div>
+
+            <div class="feature-item">
+                <h4>Dynamic Content Management</h4>
+                <p>Complete CRUD operations for various content types with rich metadata, galleries, and dynamic attributes.</p>
+                <ul>
+                    <li>Multi-format media galleries</li>
+                    <li>Flexible categorization system</li>
+                    <li>SEO-optimized URLs</li>
+                </ul>
+            </div>
+
+            <div class="feature-item">
+                <h4>Review & Rating System</h4>
+                <p>User-generated reviews with admin moderation and analytics.</p>
+                <ul>
+                    <li>Star rating system (1-5)</li>
+                    <li>Admin review moderation</li>
+                    <li>Review statistics and analytics</li>
+                </ul>
+            </div>
+
+            <div class="feature-item">
+                <h4>Admin Dashboard</h4>
+                <p>Comprehensive admin panel for content management and system administration.</p>
+                <ul>
+                    <li>User management</li>
+                    <li>Content moderation</li>
+                    <li>Analytics and reporting</li>
+                    <li>Dynamic attribute management</li>
+                </ul>
+            </div>
+
+            <div class="feature-item">
+                <h4>Responsive Design</h4>
+                <p>Modern, mobile-first design with smooth animations and optimal UX.</p>
+                <ul>
+                    <li>Tailwind CSS styling</li>
+                    <li>Motion-based animations</li>
+                    <li>Custom cursor effects</li>
+                </ul>
+            </div>
+
+            <div class="feature-item">
+                <h4>Real-time Features</h4>
+                <p>Socket.io integration for real-time updates and notifications.</p>
+                <ul>
+                    <li>Live chat capabilities</li>
+                    <li>Real-time notifications</li>
+                    <li>Live updates for content</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="guidelines" class="section">
+        <h2>8. Development Guidelines</h2>
+
+        <h3>Code Style & Standards</h3>
+
+        <h4>TypeScript Best Practices</h4>
+        <ul>
+            <li><strong>Strict typing:</strong> Enable strict mode in tsconfig.json</li>
+            <li><strong>Interface definitions:</strong> Define clear interfaces for all data structures</li>
+            <li><strong>Type safety:</strong> Avoid <code>any</code> type, use proper type assertions</li>
+            <li><strong>Generic types:</strong> Use generics for reusable components and functions</li>
+        </ul>
+
+        <h4>Component Development</h4>
+        <ul>
+            <li><strong>Functional components:</strong> Use modern React patterns with hooks</li>
+            <li><strong>Props interface:</strong> Define clear prop interfaces for all components</li>
+            <li><strong>Error boundaries:</strong> Implement error handling for component failures</li>
+            <li><strong>Performance optimization:</strong> Use React.memo, useMemo, useCallback appropriately</li>
+        </ul>
+
+        <h4>API Development</h4>
+        <ul>
+            <li><strong>RESTful design:</strong> Follow REST conventions for all endpoints</li>
+            <li><strong>Error handling:</strong> Consistent error response format</li>
+            <li><strong>Validation:</strong> Input validation using middleware</li>
+            <li><strong>Logging:</strong> Comprehensive logging for debugging and monitoring</li>
+        </ul>
+
+        <h3>Security Considerations</h3>
+
+        <div class="security-note">
+            <strong>Critical Security Practices:</strong>
+            <ul>
+                <li><strong>JWT Security:</strong> Use secure secrets, implement token expiration</li>
+                <li><strong>Password Security:</strong> bcrypt hashing with salt rounds ≥ 10</li>
+                <li><strong>Input Validation:</strong> Sanitize all user inputs to prevent injection attacks</li>
+                <li><strong>CORS Configuration:</strong> Properly configure CORS headers</li>
+                <li><strong>File Upload Security:</strong> Validate file types and sizes</li>
+                <li><strong>Rate Limiting:</strong> Implement rate limiting for API endpoints</li>
+            </ul>
+        </div>
+
+        <h3>Performance Optimization</h3>
+
+        <div class="performance-tip">
+            <strong>Frontend Performance:</strong>
+            <ul>
+                <li><strong>Next.js Optimization:</strong> Utilize App Router features and ISR</li>
+                <li><strong>Image Optimization:</strong> Use Next.js Image component with proper sizing</li>
+                <li><strong>Code Splitting:</strong> Leverage dynamic imports for large components</li>
+                <li><strong>Caching Strategy:</strong> Implement appropriate caching headers</li>
+                <li><strong>Bundle Analysis:</strong> Monitor bundle size and optimize imports</li>
+            </ul>
+        </div>
+
+        <div class="performance-tip">
+            <strong>Backend Performance:</strong>
+            <ul>
+                <li><strong>Database Indexing:</strong> Proper indexes on frequently queried fields</li>
+                <li><strong>Query Optimization:</strong> Use MongoDB aggregation pipelines efficiently</li>
+                <li><strong>Caching:</strong> Implement Redis for session and data caching</li>
+                <li><strong>Connection Pooling:</strong> Configure MongoDB connection pooling</li>
+                <li><strong>API Response Compression:</strong> Enable gzip compression</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="deployment" class="section">
+        <h2>9. Deployment & DevOps</h2>
+
+        <h3>Environment Configuration</h3>
+
+        <h4>Backend Environment Variables</h4>
+        <pre><code># Database Configuration
+# FELP AI Chat Platform Configuration
+# Copy this file to .env and fill in your values
+
+# =====================================
+# OpenAI Configuration (REQUIRED)
+# =====================================
+OPENAI_API_KEY=your_openai_api_key_here
+OPENAI_MODEL=gpt-4o
+
+# =====================================
+# SSO API Configuration (REQUIRED)
+# =====================================
+SSO_API_BASE_URL=https://sso.example.com/api
+SSO_API_PHONE=your_phone_number_here
+SSO_API_OTP=your_otp_here
+SSO_API_DEVICE_TOKEN=your_device_token_here
+SSO_API_KEY_PASS=your_api_key_password_here
+
+# =====================================
+# JWT Configuration (REQUIRED)
+# =====================================
+JWT_SECRET_KEY=your-super-secret-jwt-key-change-this-in-production
+JWT_ALGORITHM=HS256
+JWT_ACCESS_TOKEN_EXPIRE_MINUTES=1440
+
+# =====================================
+# Google OAuth Configuration (REQUIRED for Google Sign-In)
+# =====================================
+GOOGLE_CLIENT_ID=your_google_client_id_here
+GOOGLE_CLIENT_SECRET=your_google_client_secret_here
+
+# =====================================
+# Session Configuration (REQUIRED for OAuth)
+# =====================================
+SESSION_SECRET_KEY=your-session-secret-key-change-this-in-production
+
+# =====================================
+# Application Configuration
+# =====================================
+DEBUG=true
+HOST=0.0.0.0
+PORT=9000
+
+# =====================================
+# Usage Instructions
+# =====================================
+# 1. Copy this file: cp env.example .env
+# 2. Get OpenAI API key: https://platform.openai.com/api-keys
+# 3. Set OPENAI_API_KEY and JWT_SECRET_KEY
+# 4. Run: docker-compose up --build
+#
+# API Endpoints:
+# - Health: http://localhost:9000/health
+# - Auth: http://localhost:9000/auth/signup, /auth/signin
+# - Chat: http://localhost:9000/chat/message, /chat/history
+# - API Docs: http://localhost:9000/docs
+#
+# Frontend Projects (when added):
+# - Games: http://localhost:9000/games
+</code></pre>
+
+        <h4>Build & Deployment Process</h4>
+        <h4>Containerization & Orchestration</h4>
+        <ul>
+            <li><strong>Docker Support:</strong> Multi-stage builds for optimized images</li>
+            <li><strong>Volume Management:</strong> Persistent storage for uploads and database</li>
+            <li><strong>Environment Isolation:</strong> Separate containers for each service</li>
+            <li><strong>Health Checks:</strong> Container-level health monitoring</li>
+        </ul>
+
+        <h4>Backend Deployment</h4>
+        <pre><code># Development
+    uvicorn app.main:app --reload
+
+    # Production
+    uvicorn app.main:app --host 0.0.0.0 --port 9000
+
+    # Linting
+    flake8 app/
+    black app/
+    isort app/
+
+    # Testing
+    pytest
+
+    # Database Migration
+    alembic upgrade head  # Run Alembic migrations
+    </code></pre>
+
+        <h4>Frontend Deployment</h4>
+        <pre><code># Development
+    Open your HTML/CSS/JS files in a local server (e.g., Live Server extension or Python's http.server)
+
+    # Production
+    Host static files on a web server (e.g., Nginx, Apache, or cloud storage)
+    </code></pre>
+
+        <h3>Security Implementation</h3>
+
+        <h4>Authentication Security</h4>
+        <ul>
+            <li><strong>JWT Implementation:</strong> Stateless authentication with configurable expiry</li>
+            <li><strong>Password Hashing:</strong> bcrypt with salt rounds for secure storage</li>
+            <li><strong>Token Validation:</strong> Automatic expiry and refresh handling</li>
+            <li><strong>Role-Based Access:</strong> Admin and user role differentiation</li>
+            <li><strong>Request Context:</strong> Secure user data attachment to requests</li>
+        </ul>
+
+        <h4>API Security Measures</h4>
+        <ul>
+            <li><strong>CORS Configuration:</strong> Domain-specific cross-origin policies</li>
+            <li><strong>Input Validation:</strong> Request sanitization and type checking</li>
+            <li><strong>Rate Limiting:</strong> Protection against abuse (configurable)</li>
+            <li><strong>Error Handling:</strong> Secure error responses without data leakage</li>
+            <li><strong>HTTPS Enforcement:</strong> SSL/TLS encryption in production</li>
+        </ul>
+
+        <h4>File Upload Security</h4>
+        <ul>
+            <li><strong>Multer Integration:</strong> Configurable file upload middleware</li>
+            <li><strong>File Type Validation:</strong> MIME type and extension checking</li>
+            <li><strong>Size Limits:</strong> Configurable upload size restrictions</li>
+            <li><strong>Storage Security:</strong> Secure file storage with access controls</li>
+            <li><strong>Path Traversal Protection:</strong> Safe file path handling</li>
+        </ul>
+
+        <h3>File Handling & Storage</h3>
+
+        <h4>Upload Architecture</h4>
+        <ul>
+            <li><strong>Persistent Storage:</strong> Files survive application redeployments</li>
+            <li><strong>Static File Serving:</strong> Express.static configuration for uploads</li>
+            <li><strong>Directory Management:</strong> Automatic upload directory creation</li>
+            <li><strong>Environment Configuration:</strong> Configurable upload paths</li>
+            <li><strong>Multi-format Support:</strong> Images, videos, and documents</li>
+        </ul>
+
+        <h4>Media Management</h4>
+        <ul>
+            <li><strong>Gallery System:</strong> Multiple media types per content item</li>
+            <li><strong>External Media:</strong> YouTube video embedding support</li>
+            <li><strong>Image Optimization:</strong> Next.js automatic image optimization</li>
+            <li><strong>Responsive Images:</strong> Multiple size variants</li>
+            <li><strong>CDN Ready:</strong> Configurable for cloud storage integration</li>
+        </ul>
+
+        <h3>Docker Configuration</h3>
+        <p>The application is configured for containerized deployment using Docker. The frontend consists of static HTML, CSS, and JavaScript files, while the backend runs a Python FastAPI server. All services and assets are managed via Docker Compose for easy setup and orchestration.</p>
+
+        <h4>Docker Compose Setup</h4>
+        <pre><code>version: '3.8'
+services:
+  felp-ai-chat:
+    build: .
+    container_name: felp-ai-chat
+    ports:
+      - "9000:9000"
+    environment:
+      # ---- OpenAI Configuration ----
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      OPENAI_MODEL: ${OPENAI_MODEL:-gpt-4o}
+
+      # ---- SSO API Configuration ----
+      SSO_API_BASE_URL: ${SSO_API_BASE_URL:-http://sso.example.com/api}
+      SSO_API_PHONE: ${SSO_API_PHONE:your_phone_number_here}
+      SSO_API_OTP: ${SSO_API_OTP:your_otp_here}
+      SSO_API_DEVICE_TOKEN: ${SSO_API_DEVICE_TOKEN:-1}
+      SSO_API_KEY_PASS: ${SSO_API_KEY_PASS:your_api_key_password_here}
+
+      # ---- JWT Configuration ----
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY:-your-super-secret-jwt-key-change-this-in-production}
+      JWT_ALGORITHM: ${JWT_ALGORITHM:-HS256}
+      JWT_ACCESS_TOKEN_EXPIRE_MINUTES: ${JWT_ACCESS_TOKEN_EXPIRE_MINUTES:-1440}
+
+      # ---- Google OAuth Configuration ----
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
+
+      # ---- Application Configuration ----
+      DEBUG: ${DEBUG:-true}
+      HOST: ${HOST:-0.0.0.0}
+      PORT: ${PORT:-9000}
+      TZ: Europe/Berlin
+      
+      # ---- Development ----
+      PYTHONPATH: /app
+
+    volumes:
+      - ./ui-Game-Port:/app/ui-Game-Port  # Games frontend
+      - ./pet:/app/pet  # Pets frontend
+      - ./pets.md:/app/pets.md  # Pets project config
+      - ./app:/app/app  # Hot reload for Python code (development)
+    restart: unless-stopped</code></pre>
+    </section>
+
+    <section id="monitoring" class="section">
+        <h2>10. Monitoring & Logging</h2>
+
+               <h3>Logging Strategy</h3>
+        <ul>
+            <li><strong>Console logging:</strong> Development environment logging</li>
+            <li><strong>Structured logging:</strong> JSON format for production</li>
+            <li><strong>Error tracking:</strong> Comprehensive error logging with stack traces</li>
+            <li><strong>API logging:</strong> Request/response logging for debugging</li>
+        </ul>
+
+        <h3>Health Checks</h3>
+        <div class="api-endpoint">
+            <span class="method">GET</span> <span class="endpoint">/api/health</span> - Application health status
+        </div>
+
+        <h3>Performance Monitoring</h3>
+        <ul>
+            <li><strong>Response times:</strong> API endpoint performance tracking</li>
+            <li><strong>Database queries:</strong> Slow query monitoring</li>
+            <li><strong>Memory usage:</strong> Application memory monitoring</li>
+            <li><strong>Error rates:</strong> Track and alert on error rates</li>
+        </ul>
+    </section>
+
+    <section id="testing" class="section">
+        <h2>11. Testing Strategy</h2>
+        <h3>Testing Framework</h3>
+           <ul>
+              <li><strong>pytest:</strong> Main framework for backend unit, integration, and API tests</li>
+              <li><strong>FastAPI TestClient:</strong> Used for simulating API requests and responses</li>
+              <li><strong>Manual/Browser Testing:</strong> Frontend HTML/CSS/JS tested via browser and developer tools</li>
+              <li><strong>Linting & Type Checking:</strong> <code>flake8</code>, <code>black</code>, <code>isort</code> for Python code quality</li>
+           </ul>
+
+        <h3>Error Handling Patterns</h3>
+        <h4>Backend Error Handling</h4>
+        <ul>
+            <li><strong>Centralized Middleware:</strong> Global error handling with logging</li>
+            <li><strong>Structured Responses:</strong> Consistent error response format</li>
+            <li><strong>Development Logging:</strong> Detailed error information in development</li>
+            <li><strong>Production Safety:</strong> Secure error messages without data leakage</li>
+            <li><strong>Async Error Handling:</strong> Express-async-handler for route protection</li>
+        </ul>
+
+        <h4>Frontend Error Handling</h4>
+        <ul>
+            <li><strong>API Error Responses:</strong> Structured error handling in services</li>
+              <li><strong>Exception Handlers:</strong> FastAPI global exception handlers for consistent error responses</li>
+              <li><strong>Structured Responses:</strong> Standardized error format for API responses</li>
+              <li><strong>Logging:</strong> Log errors and exceptions for debugging and monitoring</li>
+              <li><strong>Development Logging:</strong> Verbose error output in development mode</li>
+              <li><strong>Production Safety:</strong> Hide sensitive error details in production</li>
+
+
+        <h3>Test Categories</h3>
+
+              <li><strong>API Error Handling:</strong> JavaScript <code>try/catch</code> for fetch/XHR errors</li>
+              <li><strong>User Feedback:</strong> Display error messages or alerts in the UI</li>
+              <li><strong>Loading States:</strong> Show loading indicators during API calls</li>
+              <li><strong>Offline Handling:</strong> Graceful fallback for network issues</li>
+              <li><strong>Form Validation:</strong> Client-side validation and error display for forms</li>
+            <li>Component logic</li>
+        </ul>
+
+        <h4>Integration Tests</h4>
+        <ul>
+            <li>API endpoints</li>
+              <li>Python utility functions (backend)</li>
+              <li>Service/business logic functions (backend)</li>
+              <li>API endpoint logic (backend)</li>
+              <li>JavaScript utility functions (frontend, if any)</li>
+
+        <h4>E2E Tests</h4>
+        <ul>
+            <li>User registration and login</li>
+              <li>API endpoint tests using FastAPI TestClient</li>
+              <li>Database operations and queries</li>
+              <li>Authentication and authorization flows</li>
+              <li>End-to-end data flow between backend and frontend (manual/browser)</li>
+    </section>
+    
+    <section id="scalability" class="section">
+    <h2>12. Scalability Considerations</h2>
+    <ul>
+        <li><strong>Optimized database queries:</strong> Indexing, query optimization, and execution plan analysis in SQL Server</li>
+        <li><strong>Stored procedures & views:</strong> Use of efficient stored procedures and views to reduce application load</li>
+        <li><strong>Connection pooling:</strong> Efficient management of database connections for high concurrency</li>
+        <li><strong>Partitioning & sharding:</strong> Table partitioning for large tables; optional sharding/federation for very large datasets</li>
+        <li><strong>Caching layer:</strong> Redis or in-memory caching to reduce frequent database hits</li>
+        <li><strong>Load balancing:</strong> Multiple backend server instances to distribute traffic</li>
+        <li><strong>CDN integration:</strong> Content delivery network for static assets like images, CSS, JS</li>
+    </ul>
+</section>
+
+
+    <section id="workflow" class="section">
+        <h2>13. Development Workflow</h2>
+
+        <h3>Branching Strategy</h3>
+        <ul>
+            <li><strong>Main branch:</strong> Production-ready code with version tags</li>
+            <li><strong>Feature branches:</strong> Individual feature development (feature/*)</li>
+            <li><strong>Hotfix branches:</strong> Critical production bug fixes</li>
+        </ul>
+
+        <h3>Code Quality Tools</h3>
+        <ul>
+            <li><strong>flake8:</strong> Python linting for code style and errors</li>
+            <li><strong>black:</strong> Python code formatting</li>
+            <li><strong>isort:</strong> Import sorting for Python files</li>
+            <li><strong>pytest:</strong> Automated backend testing</li>
+            <li><strong>Manual/Browser Testing:</strong> Frontend HTML/CSS/JS tested via browser and developer tools</li>
+        </ul>
+
+        <h3>Development Environment</h3>
+
+        <h4>Local Development Setup</h4>
+        <ul>
+            <li><strong>Python:</strong> Version 3.12+ (recommended)</li>
+            <li><strong>FastAPI:</strong> Backend server framework</li>
+            <li><strong>SQL Server:</strong> Database (local or remote)</li>
+            <li><strong>Docker Compose:</strong> For containerized development and deployment</li>
+            <li><strong>Environment Variables:</strong> .env files for configuration</li>
+            <li><strong>Ports:</strong> Backend & static frontend (9000)</li>
+            <li><strong>Concurrent Development:</strong> Multiple terminal sessions for backend and frontend</li>
+        </ul>
+
+        <h4>IDE Configuration</h4>
+        <ul>
+            <li><strong>Python Support:</strong> Full IntelliSense and error checking</li>
+            <li><strong>HTML/CSS/JS Extensions:</strong> Recommended for frontend editing</li>
+            <li><strong>Debug Configuration:</strong> VS Code launch configurations for backend (Uvicorn) and static frontend</li>
+            <li><strong>Extensions:</strong> Python, Docker, and SQL Server extensions</li>
+        </ul>
+
+        <h3>Code Review Process</h3>
+        <ul>
+            <li><strong>Pull request template:</strong> Standardized PR format</li>
+            <li><strong>Automated testing:</strong> pytest for backend, manual browser testing for frontend</li>
+            <li><strong>Code quality checks:</strong> flake8, black, isort</li>
+            <li><strong>Security scanning:</strong> Review for secrets, credentials, and vulnerabilities</li>
+        </ul>
+
+        <h3>CI/CD Pipeline (Recommended)</h3>
+
+        <h4>Automated Testing</h4>
+        <ul>
+            <li><strong>Unit Tests:</strong> pytest for backend logic and API endpoints</li>
+            <li><strong>Integration Tests:</strong> FastAPI TestClient for API endpoint testing</li>
+            <li><strong>E2E Tests:</strong> Manual browser-based testing for frontend flows</li>
+            <li><strong>Linting & Formatting:</strong> flake8, black, isort for Python code</li>
+            <li><strong>Security Scanning:</strong> Dependency and secret checks</li>
+        </ul>
+
+        <h4>Build & Deployment Automation</h4>
+        <ul>
+            <li><strong>Docker Compose:</strong> Single FastAPI container serving backend and static frontend</li>
+            <li><strong>Environment Promotion:</strong> Development → Production</li>
+            <li><strong>Database Migrations:</strong> Alembic for schema updates</li>
+            <li><strong>Rollback Strategy:</strong> Quick reversion to previous stable versions</li>
+            <li><strong>Monitoring Integration:</strong> Automated deployment notifications (optional)</li>
+        </ul>
+
+        <h3>Commit Message Convention</h3>
+        <pre><code>type(scope): description
+
+Types:
+- feat: New feature
+- fix: Bug fix
+- docs: Documentation
+- style: Code style changes
+- refactor: Code refactoring
+- test: Testing
+- chore: Maintenance</code></pre>
+
+        <h3>Code Quality Standards</h3>
+
+        <h4>Frontend Code Quality</h4>
+        <ul>
+            <li><strong>Page Structure:</strong> Separate HTML files for each main view</li>
+            <li><strong>Styling:</strong> CSS files with custom styles and optional Tailwind CSS</li>
+            <li><strong>Performance Optimization:</strong> Minimize JS/CSS, optimize images</li>
+            <li><strong>Accessibility:</strong> Semantic HTML and ARIA attributes</li>
+            <li><strong>Responsive Design:</strong> Mobile-first approach with Tailwind CSS</li>
+        </ul>
+
+        <h4>Backend Code Quality</h4>
+        <ul>
+            <li><strong>Service Organization:</strong> Separation of concerns with routers, services, and utils</li>
+            <li><strong>Error Handling:</strong> Consistent error responses and logging (FastAPI exception handlers)</li>
+            <li><strong>Database Optimization:</strong> Efficient SQL queries and proper indexing</li>
+            <li><strong>Security Best Practices:</strong> Input validation, secure headers, JWT, bcrypt</li>
+            <li><strong>API Documentation:</strong> Swagger/OpenAPI auto-generated by FastAPI</li>
+        </ul>
+    </section>
+
+    <footer style="text-align: center; margin-top: 50px; padding: 20px; border-top: 1px solid var(--border-color); color: #666;">
+        <p><strong>Felp Pets Technical Specification v1.0.0</strong></p>
+        <p>This document serves as the technical specification for Felp Pets.</p>
+        <p>Last updated: September 19, 2025</p>
+    </footer>
+</body>
+</html>
