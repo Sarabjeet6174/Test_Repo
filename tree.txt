@@ -1,0 +1,106 @@
+MyFinder/MyFinder
+└── bb/                    # Primary app bundle / sub-app
+    ├── home.html          # Home page
+    ├── about.html         # About page
+    ├── home.css           # Home page styles
+    ├── styles.css         # Shared/global styles
+    ├── style2.css         # Additional styles
+    ├── tailwind.config.js # Tailwind CSS configuration
+    ├── t&c.html           # Terms & conditions
+    ├── legal.html         # Legal information
+    ├── policy.html        # Privacy policy
+    ├── signin.html        # Sign-in page
+    ├── register.html      # Registration page
+    ├── profile.html       # User profile page
+    ├── Untitled.html      # Spare/test page
+    ├── felp-ai-universal.js# Shared JS logic (Felp AI loader)
+    ├── chatbot.css        # Chatbot styling
+    ├── businessregister.html # Business register page
+    ├── businessprofile.html  # Business profile page
+    └── js/               # Client JS helpers
+        ├── loading-enhancer.js
+        ├── config.js
+        ├── cache-manager.js
+        └── (other helper scripts)
+
+
+PetsShop/PetsShop
+├── about.html             # About page
+├── home.html              # Home page
+├── home.css               # Home page styles
+├── app.js                 # Main JS for interactivity and API calls
+├── app.css                # Main CSS styles
+├── styles.css             # Shared/global styles
+├── style2.css             # Additional styles
+├── tailwind.config.js     # Tailwind CSS configuration
+├── felp-ai-universal.js   # Shared JS logic (Felp AI loader)
+├── t&c.html               # Terms & conditions
+├── legal.html             # Legal information
+├── policy.html            # Privacy policy
+├── signin.html            # Sign-in page
+├── register.html          # Registration page
+├── profile.html           # User profile page
+├── Untitled.html          # Spare/test page
+├── js/                    # Client JS helpers
+│   ├── loading-enhancer.js
+│   └── config.js
+└── assest/                # Images and other static files
+    └── public/
+        └── img/
+            ├── blue-brush.png
+            └── bg.jpg
+            └── (other images)
+
+
+GamePort/GamePort
+├── about.html             # About page
+├── home.html              # Home page
+├── home.css               # Home page styles
+├── app.js                 # Main JS for interactivity and API calls
+├── app.css                # Main CSS styles
+├── styles.css             # Shared/global styles
+├── style2.css             # Additional styles
+├── enhanced_responsive.css# Responsive / extra layout CSS
+├── tailwind.config.js     # Tailwind CSS configuration
+├── felp-ai-universal.js   # Shared JS logic (Felp AI loader)
+├── t&c.html               # Terms & conditions
+├── legal.html             # Legal information
+├── policy.html            # Privacy policy
+├── signin.html            # Sign-in page
+├── register.html          # Registration page
+├── profile.html           # User profile page
+├── Untitled.html          # Spare/test page
+├── js/                    # Client JS helpers
+│   ├── loading-enhancer.js
+│   └── config.js
+└── assest/                # Images and other static assets
+    └── public/
+        └── img/
+            └── (various image files, e.g., #.png, backgrounds)
+
+
+FelpBooking/FelpBooking
+├── about.html            # About page
+├── home.html             # Home page
+├── home.css              # Home page styles
+├── app.js                # Main JS for interactivity and API calls
+├── app.css               # Main CSS styles
+├── styles.css            # Shared/global styles
+├── style2.css            # Additional styles
+├── tailwind.config.js    # Tailwind CSS configuration
+├── felp-ai-universal.js  # Shared JS logic (Felp AI loader)
+├── t&c.html              # Terms & conditions
+├── legal.html            # Legal information
+├── policy.html           # Privacy policy
+├── signin.html           # Sign-in page
+├── register.html         # Registration page
+├── profile.html          # User profile page
+├── Untitled.html         # Spare/test page
+├── js/                   # Client JS helpers
+│   ├── loading-enhancer.js
+│   └── config.js
+└── assest/               # Images, icons, and other static files
+    └── public/
+        └── icons/
+            ├── Union-1.png
+            └── Group.png

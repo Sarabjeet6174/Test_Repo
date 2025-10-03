@@ -1,0 +1,304 @@
+   <h2>BLUEBOOK_REG_QUES</h2>
+<table>
+  <tr>
+    <th>ColumnName</th>
+    <th>DataType</th>
+    <th>MaxLength</th>
+    <th>IsNullable</th>
+    <th>IsIdentity</th>
+  </tr>
+  <tr><td>QUES_IDNO</td><td>int</td><td>4</td><td>0</td><td>1</td></tr>
+  <tr><td>QUES_SORT_NO</td><td>int</td><td>4</td><td>0</td><td>0</td></tr>
+  <tr><td>QUES_TEXT</td><td>varchar</td><td>-1</td><td>0</td><td>0</td></tr>
+  <tr><td>QUES_ISMANDATORY</td><td>int</td><td>4</td><td>1</td><td>0</td></tr>
+  <tr><td>PROJECT_IDNO</td><td>int</td><td>4</td><td>1</td><td>0</td></tr>
+  <tr><td>QUES_COLUMN_NAME</td><td>varchar</td><td>100</td><td>1</td><td>0</td></tr>
+  <tr><td>QUES_CATEG_IDNO</td><td>int</td><td>4</td><td>1</td><td>0</td></tr>
+  <tr><td>QUES_OPTION</td><td>varchar</td><td>-1</td><td>1</td><td>0</td></tr>
+</table>
+
+<h2>BLUEBOOK_REG_DETAIL</h2>
+<table>
+  <tr>
+    <th>ColumnName</th>
+    <th>DataType</th>
+    <th>MaxLength</th>
+    <th>IsNullable</th>
+    <th>IsIdentity</th>
+  </tr>
+  <tr><td>REG_IDNO</td><td>int</td><td>4</td><td>0</td><td>1</td></tr>
+  <tr><td>REG_QUES_IDNO</td><td>int</td><td>4</td><td>0</td><td>0</td></tr>
+  <tr><td>REG_ANSWER</td><td>varchar</td><td>-1</td><td>0</td><td>0</td></tr>
+  <tr><td>REG_CRDATE</td><td>datetime</td><td>8</td><td>1</td><td>0</td></tr>
+  <tr><td>REG_CRUSER</td><td>int</td><td>4</td><td>0</td><td>0</td></tr>
+  <tr><td>REG_CATG_IDNO</td><td>int</td><td>4</td><td>1</td><td>0</td></tr>
+</table>
+
+<h2>BLUEBOOK_CATG_MST</h2>
+<table>
+  <tr>
+    <th>ColumnName</th>
+    <th>DataType</th>
+    <th>MaxLength</th>
+    <th>IsNullable</th>
+    <th>IsIdentity</th>
+  </tr>
+  <tr><td>CATG_IDNO</td><td>int</td><td>4</td><td>0</td><td>1</td></tr>
+  <tr><td>CATG_NAME</td><td>varchar</td><td>200</td><td>1</td><td>0</td></tr>
+  <tr><td>PROJECT_IDNO</td><td>int</td><td>4</td><td>1</td><td>0</td></tr>
+  <tr><td>CATG_ICON</td><td>varchar</td><td>500</td><td>1</td><td>0</td></tr>
+</table>
+
+<h2>SSO_BUSINESS_USER_MST</h2>
+<table>
+  <tr>
+    <th>ColumnName</th>
+    <th>DataType</th>
+    <th>MaxLength</th>
+    <th>IsNullable</th>
+    <th>IsIdentity</th>
+  </tr>
+  <tr><td>BS_BUSINESS_ID</td><td>int</td><td>4</td><td>0</td><td>1</td></tr>
+  <tr><td>BS_USER_ID</td><td>int</td><td>4</td><td>1</td><td>0</td></tr>
+  <tr><td>BS_USER_PROJECT_ID</td><td>int</td><td>4</td><td>1</td><td>0</td></tr>
+  <tr><td>BS_COMPANY_NAME</td><td>varchar</td><td>255</td><td>1</td><td>0</td></tr>
+  <tr><td>BS_CATG_ID</td><td>int</td><td>4</td><td>1</td><td>0</td></tr>
+  <tr><td>BS_TAGLINE</td><td>varchar</td><td>-1</td><td>1</td><td>0</td></tr>
+  <tr><td>BS_ABOUT</td><td>varchar</td><td>-1</td><td>1</td><td>0</td></tr>
+  <tr><td>BS_LOGO</td><td>varchar</td><td>-1</td><td>1</td><td>0</td></tr>
+  <tr><td>BS_EMAIL</td><td>varchar</td><td>255</td><td>1</td><td>0</td></tr>
+  <tr><td>BS_PHONE</td><td>varchar</td><td>50</td><td>1</td><td>0</td></tr>
+  <tr><td>BS_WEBSITE</td><td>varchar</td><td>-1</td><td>1</td><td>0</td></tr>
+  <tr><td>BS_ADDRS1</td><td>varchar</td><td>-1</td><td>1</td><td>0</td></tr>
+  <tr><td>BS_ADDRS2</td><td>varchar</td><td>-1</td><td>1</td><td>0</td></tr>
+  <tr><td>BS_CITY</td><td>varchar</td><td>100</td><td>1</td><td>0</td></tr>
+  <tr><td>BS_STATE</td><td>varchar</td><td>100</td><td>1</td><td>0</td></tr>
+  <tr><td>BS_COUNTRY</td><td>varchar</td><td>100</td><td>1</td><td>0</td></tr>
+  <tr><td>BS_PINCODE</td><td>varchar</td><td>20</td><td>1</td><td>0</td></tr>
+  <tr><td>BS_TRADE_LICENSE_NO</td><td>varchar</td><td>100</td><td>1</td><td>0</td></tr>
+  <tr><td>BS_TRADE_LICENSE_IMG</td><td>varchar</td><td>-1</td><td>1</td><td>0</td></tr>
+  <tr><td>BS_VAT_NO</td><td>varchar</td><td>100</td><td>1</td><td>0</td></tr>
+  <tr><td>BS_VAT_IMG</td><td>varchar</td><td>500</td><td>1</td><td>0</td></tr>
+  <tr><td>BS_CERTIFICATE_TITLE</td><td>varchar</td><td>255</td><td>1</td><td>0</td></tr>
+  <tr><td>BS_CERTIFICATE_IMAGE</td><td>varchar</td><td>-1</td><td>1</td><td>0</td></tr>
+</table>
+
+<!-- SSO_BUSINESS_WORKING_HOURS -->
+<h2>SSO_BUSINESS_WORKING_HOURS</h2>
+<table>
+    <tr><th>ColumnName</th><th>DataType</th><th>MaxLength</th><th>IsNullable</th><th>IsIdentity</th></tr>
+    <tr><td>WH_ID</td><td>int</td><td>4</td><td>0</td><td>1</td></tr>
+    <tr><td>WH_MONDAY_START</td><td>time</td><td>5</td><td>1</td><td>0</td></tr>
+    <tr><td>WH_MONDAY_END</td><td>time</td><td>5</td><td>1</td><td>0</td></tr>
+    <tr><td>WH_MONDAY_STATUS</td><td>int</td><td>4</td><td>1</td><td>0</td></tr>
+    <tr><td>WH_TUESDAY_START</td><td>time</td><td>5</td><td>1</td><td>0</td></tr>
+    <tr><td>WH_TUESDAY_END</td><td>time</td><td>5</td><td>1</td><td>0</td></tr>
+    <tr><td>WH_TUESDAY_STATUS</td><td>int</td><td>4</td><td>1</td><td>0</td></tr>
+    <tr><td>WH_WEDNESDAY_START</td><td>time</td><td>5</td><td>1</td><td>0</td></tr>
+    <tr><td>WH_WEDNESDAY_END</td><td>time</td><td>5</td><td>1</td><td>0</td></tr>
+    <tr><td>WH_WEDNESDAY_STATUS</td><td>int</td><td>4</td><td>1</td><td>0</td></tr>
+    <tr><td>WH_THURSDAY_START</td><td>time</td><td>5</td><td>1</td><td>0</td></tr>
+    <tr><td>WH_THURSDAY_END</td><td>time</td><td>5</td><td>1</td><td>0</td></tr>
+    <tr><td>WH_THURSDAY_STATUS</td><td>int</td><td>4</td><td>1</td><td>0</td></tr>
+    <tr><td>WH_FRIDAY_START</td><td>time</td><td>5</td><td>1</td><td>0</td></tr>
+    <tr><td>WH_FRIDAY_END</td><td>time</td><td>5</td><td>1</td><td>0</td></tr>
+    <tr><td>WH_FRIDAY_STATUS</td><td>int</td><td>4</td><td>1</td><td>0</td></tr>
+    <tr><td>WH_SATURDAY_START</td><td>time</td><td>5</td><td>1</td><td>0</td></tr>
+    <tr><td>WH_SATURDAY_END</td><td>time</td><td>5</td><td>1</td><td>0</td></tr>
+    <tr><td>WH_SATURDAY_STATUS</td><td>int</td><td>4</td><td>1</td><td>0</td></tr>
+    <tr><td>WH_SUNDAY_START</td><td>time</td><td>5</td><td>1</td><td>0</td></tr>
+    <tr><td>WH_SUNDAY_END</td><td>time</td><td>5</td><td>1</td><td>0</td></tr>
+    <tr><td>WH_SUNDAY_STATUS</td><td>int</td><td>4</td><td>1</td><td>0</td></tr>
+    <tr><td>WH_BUSINESS_ID</td><td>int</td><td>4</td><td>1</td><td>0</td></tr>
+</table>
+
+<!-- BBD_ERROR_LOG -->
+<h2>BBD_ERROR_LOG</h2>
+<table>
+    <tr><th>ColumnName</th><th>DataType</th><th>MaxLength</th><th>IsNullable</th><th>IsIdentity</th></tr>
+    <tr><td>Id</td><td>int</td><td>4</td><td>0</td><td>1</td></tr>
+    <tr><td>TableName</td><td>varchar</td><td>100</td><td>1</td><td>0</td></tr>
+    <tr><td>ProcedureName</td><td>varchar</td><td>100</td><td>1</td><td>0</td></tr>
+    <tr><td>ErrorMessage</td><td>varchar</td><td>-1</td><td>1</td><td>0</td></tr>
+    <tr><td>ErrorDateTime</td><td>datetime</td><td>8</td><td>1</td><td>0</td></tr>
+</table>
+
+<!-- BBD_POSTAPI_LOG -->
+<h2>BBD_POSTAPI_LOG</h2>
+<table>
+    <tr><th>ColumnName</th><th>DataType</th><th>MaxLength</th><th>IsNullable</th><th>IsIdentity</th></tr>
+    <tr><td>Id</td><td>int</td><td>4</td><td>0</td><td>1</td></tr>
+    <tr><td>MODULE_NAME</td><td>varchar</td><td>200</td><td>1</td><td>0</td></tr>
+    <tr><td>SP_NAME</td><td>varchar</td><td>200</td><td>1</td><td>0</td></tr>
+    <tr><td>TASK_NAME</td><td>varchar</td><td>200</td><td>1</td><td>0</td></tr>
+    <tr><td>SQL_STRING</td><td>varchar</td><td>-1</td><td>1</td><td>0</td></tr>
+    <tr><td>DOCUMENT_PATH</td><td>varchar</td><td>-1</td><td>1</td><td>0</td></tr>
+    <tr><td>POST_OBJECT</td><td>varchar</td><td>-1</td><td>1</td><td>0</td></tr>
+    <tr><td>API_CRDATE</td><td>datetime</td><td>8</td><td>1</td><td>0</td></tr>
+    <tr><td>err_msg</td><td>varchar</td><td>-1</td><td>1</td><td>0</td></tr>
+    <tr><td>API_COMPL_DTTIME</td><td>datetime</td><td>8</td><td>1</td><td>0</td></tr>
+    <tr><td>API_RESPONSE_TIME</td><td>time</td><td>5</td><td>1</td><td>0</td></tr>
+</table>
+<!-- BBD_POSTAPI_LOG_ARCH -->
+<h2>BBD_POSTAPI_LOG_ARCH</h2>
+<table>
+    <tr><th>ColumnName</th><th>DataType</th><th>MaxLength</th><th>IsNullable</th><th>IsIdentity</th></tr>
+    <tr><td>Id</td><td>int</td><td>4</td><td>0</td><td>1</td></tr>
+    <tr><td>MODULE_NAME</td><td>varchar</td><td>200</td><td>1</td><td>0</td></tr>
+    <tr><td>SP_NAME</td><td>varchar</td><td>200</td><td>1</td><td>0</td></tr>
+    <tr><td>TASK_NAME</td><td>varchar</td><td>200</td><td>1</td><td>0</td></tr>
+    <tr><td>SQL_STRING</td><td>varchar</td><td>-1</td><td>1</td><td>0</td></tr>
+    <tr><td>DOCUMENT_PATH</td><td>varchar</td><td>-1</td><td>1</td><td>0</td></tr>
+    <tr><td>POST_OBJECT</td><td>varchar</td><td>-1</td><td>1</td><td>0</td></tr>
+    <tr><td>API_CRDATE</td><td>datetime</td><td>8</td><td>1</td><td>0</td></tr>
+    <tr><td>err_msg</td><td>varchar</td><td>-1</td><td>1</td><td>0</td></tr>
+    <tr><td>API_COMPL_DTTIME</td><td>datetime</td><td>8</td><td>1</td><td>0</td></tr>
+    <tr><td>API_RESPONSE_TIME</td><td>time</td><td>5</td><td>1</td><td>0</td></tr>
+</table>
+
+<!-- BBM_COMMON_API -->
+<h2>BBM_COMMON_API</h2>
+<table>
+    <tr><th>ColumnName</th><th>DataType</th><th>MaxLength</th><th>IsNullable</th><th>IsIdentity</th></tr>
+    <tr><td>ID</td><td>int</td><td>4</td><td>0</td><td>1</td></tr>
+    <tr><td>API_NAME</td><td>varchar</td><td>200</td><td>0</td><td>0</td></tr>
+    <tr><td>API_PATH</td><td>varchar</td><td>500</td><td>0</td><td>0</td></tr>
+    <tr><td>API_TYPE</td><td>varchar</td><td>50</td><td>1</td><td>0</td></tr>
+    <tr><td>CREATED_ON</td><td>datetime</td><td>8</td><td>0</td><td>0</td></tr>
+</table>
+
+<!-- SSO_PROJECT_MST -->
+<h2>SSO_PROJECT_MST</h2>
+<table>
+    <tr><th>ColumnName</th><th>DataType</th><th>MaxLength</th><th>IsNullable</th><th>IsIdentity</th></tr>
+    <tr><td>PROJECT_ID</td><td>int</td><td>4</td><td>0</td><td>1</td></tr>
+    <tr><td>PROJECT_NAME</td><td>varchar</td><td>200</td><td>0</td><td>0</td></tr>
+    <tr><td>PROJECT_DESC</td><td>varchar</td><td>500</td><td>1</td><td>0</td></tr>
+    <tr><td>PROJECT_STATUS</td><td>int</td><td>4</td><td>0</td><td>0</td></tr>
+    <tr><td>CREATED_DATE</td><td>datetime</td><td>8</td><td>0</td><td>0</td></tr>
+</table>
+
+<!-- SSO_USER_MST -->
+<h2>SSO_USER_MST</h2>
+<table>
+    <tr><th>ColumnName</th><th>DataType</th><th>MaxLength</th><th>IsNullable</th><th>IsIdentity</th></tr>
+    <tr><td>USER_ID</td><td>int</td><td>4</td><td>0</td><td>1</td></tr>
+    <tr><td>USERNAME</td><td>varchar</td><td>150</td><td>0</td><td>0</td></tr>
+    <tr><td>PASSWORD</td><td>varchar</td><td>200</td><td>0</td><td>0</td></tr>
+    <tr><td>EMAIL</td><td>varchar</td><td>200</td><td>1</td><td>0</td></tr>
+    <tr><td>CREATED_ON</td><td>datetime</td><td>8</td><td>0</td><td>0</td></tr>
+</table>
+
+<!-- SSO_USER_PROJECTS -->
+<h2>SSO_USER_PROJECTS</h2>
+<table>
+    <tr><th>ColumnName</th><th>DataType</th><th>MaxLength</th><th>IsNullable</th><th>IsIdentity</th></tr>
+    <tr><td>ID</td><td>int</td><td>4</td><td>0</td><td>1</td></tr>
+    <tr><td>USER_ID</td><td>int</td><td>4</td><td>0</td><td>0</td></tr>
+    <tr><td>PROJECT_ID</td><td>int</td><td>4</td><td>0</td><td>0</td></tr>
+    <tr><td>ASSIGNED_DATE</td><td>datetime</td><td>8</td><td>0</td><td>0</td></tr>
+</table>
+
+<!-- CHAT_TRAN -->
+<h2>CHAT_TRAN</h2>
+<table>
+    <tr><th>ColumnName</th><th>DataType</th><th>MaxLength</th><th>IsNullable</th><th>IsIdentity</th></tr>
+    <tr><td>CHAT_IDNO</td><td>int</td><td>4</td><td>0</td><td>1</td></tr>
+    <tr><td>USER_ID</td><td>int</td><td>4</td><td>0</td><td>0</td></tr>
+    <tr><td>MESSAGE</td><td>varchar</td><td>-1</td><td>0</td><td>0</td></tr>
+    <tr><td>TIMESTAMP</td><td>datetime</td><td>8</td><td>0</td><td>0</td></tr>
+</table>
+
+<!-- SSO_USER_LOGIN_LOG -->
+<h2>SSO_USER_LOGIN_LOG</h2>
+<table>
+    <tr><th>ColumnName</th><th>DataType</th><th>MaxLength</th><th>IsNullable</th><th>IsIdentity</th></tr>
+    <tr><td>LOGIN_ID</td><td>int</td><td>4</td><td>0</td><td>1</td></tr>
+    <tr><td>USER_ID</td><td>int</td><td>4</td><td>0</td><td>0</td></tr>
+    <tr><td>LOGIN_TIME</td><td>datetime</td><td>8</td><td>0</td><td>0</td></tr>
+    <tr><td>LOGOUT_TIME</td><td>datetime</td><td>8</td><td>1</td><td>0</td></tr>
+    <tr><td>STATUS</td><td>varchar</td><td>50</td><td>1</td><td>0</td></tr>
+</table>
+
+
+
+
+
+        <h3>Technology Stack Overview</h3>
+        <div class="tech-stack">
+            <div class="tech-item">
+                <h4>Frontend</h4>
+                <ul>
+                    <li><strong>Languages:</strong> HTML5, CSS3, JavaScript (ES6+)</li>
+                    <li><strong>Structure:</strong> Organized by feature/module in folders:
+                        <ul>
+                            <li><code>pet/pet/</code>: Main user-facing pages (home, about, profile, register, signin, legal, policy, t&c), CSS, JS, assets</li>
+                            <li><code>chatbot_ui/chatbot_ui/</code>: Chatbot interface (finder.html, finder.js, finder.css, assets)</li>
+                            <li><code>ui-Game-Port/ui-Game-Port/</code>: Game Port UI (home.html, about.html, profile.html, etc.)</li>
+                            <li><code>static/images/profiles/</code>: Profile images and other static assets</li>
+                        </ul>
+                    </li>
+                    <li><strong>Styling:</strong> Custom CSS and Tailwind CSS for responsive design</li>
+                    <li><strong>JavaScript:</strong> Modular JS files for interactivity, API calls, and UI logic</li>
+                    <li><strong>Navigation:</strong> Static routing via anchor tags between HTML pages</li>
+                    <li><strong>Assets:</strong> Images, icons, and other static files organized in <code>assets/</code> and <code>static/</code></li>
+                    <li><strong>API Integration:</strong> Fetch/Axios for communication with FastAPI backend</li>
+                    <li><strong>Authentication:</strong> JWT token management in localStorage/sessionStorage</li>
+                    <li><strong>Accessibility & SEO:</strong> Semantic HTML, ARIA attributes, and meta tags</li>
+                </ul>
+            </div>
+
+
+
+
+                    <h4>Docker Compose Setup</h4>
+        <pre><code>version: '3.8'
+services:
+  felp-ai-chat:
+    build: .
+    container_name: felp-ai-chat
+    ports:
+      - "9000:9000"
+    environment:
+      # ---- OpenAI Configuration ----
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      OPENAI_MODEL: ${OPENAI_MODEL:-gpt-4o}
+
+      # ---- SSO API Configuration ----
+      SSO_API_BASE_URL: ${SSO_API_BASE_URL:-http://sso.example.com/api}
+      SSO_API_PHONE: ${SSO_API_PHONE:your_phone_number_here}
+      SSO_API_OTP: ${SSO_API_OTP:your_otp_here}
+      SSO_API_DEVICE_TOKEN: ${SSO_API_DEVICE_TOKEN:-1}
+      SSO_API_KEY_PASS: ${SSO_API_KEY_PASS:your_api_key_password_here}
+
+      # ---- JWT Configuration ----
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY:-your-super-secret-jwt-key-change-this-in-production}
+      JWT_ALGORITHM: ${JWT_ALGORITHM:-HS256}
+      JWT_ACCESS_TOKEN_EXPIRE_MINUTES: ${JWT_ACCESS_TOKEN_EXPIRE_MINUTES:-1440}
+
+      # ---- Google OAuth Configuration ----
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
+
+      # ---- Application Configuration ----
+      DEBUG: ${DEBUG:-true}
+      HOST: ${HOST:-0.0.0.0}
+      PORT: ${PORT:-9000}
+      TZ: Europe/Berlin
+      
+      # ---- Development ----
+      PYTHONPATH: /app
+
+    volumes:
+      - ./ui-Game-Port:/app/ui-Game-Port  # Games frontend
+      - ./pet:/app/pet  # Pets frontend
+      - ./blue_book:/app/blue_book  # Blue Book frontend
+      - ./games.md:/app/games.md  # Games project config
+      - ./pets.md:/app/pets.md  # Pets project config
+      - ./blue_book.md:/app/blue_book.md  # Blue Book project config
+      - ./games_prompt.txt:/app/games_prompt.txt  # Games AI prompt
+      - ./pets_prompt.txt:/app/pets_prompt.txt  # Pets AI prompt
+      - ./blue_book_prompt.txt:/app/blue_book_prompt.txt  # Blue Book AI prompt
+      - ./app:/app/app  # Hot reload for Python code (development)
+    restart: unless-stopped</code></pre>
+    </section>

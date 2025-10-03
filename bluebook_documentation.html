@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Felp Pets Technical Specification</title>
+    <title>MyFinder Technical Specification</title>
     <style>
         :root {
             --primary-color: #000000;
@@ -281,7 +281,7 @@
 <body>
     <!-- Navigation Menu -->
     <nav class="nav-menu">
-        <h1>Felp Pets Technical Specification</h1>
+        <h1>MyFinder Technical Specification</h1>
         <div class="nav-links">
             <a href="#overview">Overview</a>
             <a href="#architecture">Architecture</a>
@@ -300,9 +300,9 @@
     </nav>
 
     <header>
-        <h1>Felp Pets Technical Specification</h1>
+        <h1>MyFinder Technical Specification</h1>
         <p><strong>Version:</strong> 1.0.0 | <strong>Last Updated:</strong> September 19, 2025</p>
-        <p><em>A comprehensive technical specification for Felp Pets with HTML/JS frontend and Python-Fast API backend</em></p>
+        <p><em>A comprehensive technical specification for MyFinder with HTML/JS frontend and Python-Fast API backend</em></p>
     </header>
 
     <section id="overview" class="section">
@@ -352,7 +352,9 @@
                     <li><strong>Languages:</strong> HTML5, CSS3, JavaScript (ES6+)</li>
                     <li><strong>Structure:</strong> Organized by feature/module in folders:
                         <ul>
-                            <li><code>pet/pet/</code>: Main user-facing pages (home, about, profile, register, signin, legal, policy, t&c), CSS, JS, assets</li>
+                            <li><code>bluebo/pet/</code>: Main user-facing pages (home, about, profile, register, signin, legal, policy, t&c), CSS, JS, assets</li>
+                            <li><code>chatbot_ui/chatbot_ui/</code>: Chatbot interface (finder.html, finder.js, finder.css, assets)</li>
+                            <li><code>ui-Game-Port/ui-Game-Port/</code>: Game Port UI (home.html, about.html, profile.html, etc.)</li>
                             <li><code>static/images/profiles/</code>: Profile images and other static assets</li>
                         </ul>
                     </li>
@@ -558,25 +560,31 @@
 
     <h3>Project Structure</h3>
     <pre><code>frontend/
-    ├── pet/
-    └── pet/
-        ├── home.html           # Home page
-        ├── about.html          # About page
-        ├── profile.html        # User profile page
-        ├── register.html       # Registration page
-        ├── signin.html         # Sign-in page
-        ├── legal.html          # Legal information
-        ├── policy.html         # Privacy policy
-        ├── t&c.html            # Terms & conditions
-        ├── app.js              # Main JS for interactivity and API calls
-        ├── app.css             # Main CSS styles
-        ├── home.css            # Home page specific styles
-        ├── styles.css          # Shared/global styles
-        ├── style2.css          # Additional styles
-        ├── tailwind.config.js  # Tailwind CSS configuration
-        ├── felp-ai-universal.js# Shared JS logic
-        ├── assest/             # Images, icons, and other static files
-        └── js/                 # Additional JS modules
+        MyFinder/MyFinder
+        └── bb/                    # Primary app bundle / sub-app
+            ├── home.html          # Home page
+            ├── about.html         # About page
+            ├── home.css           # Home page styles
+            ├── styles.css         # Shared/global styles
+            ├── style2.css         # Additional styles
+            ├── tailwind.config.js # Tailwind CSS configuration
+            ├── t&c.html           # Terms & conditions
+            ├── legal.html         # Legal information
+            ├── policy.html        # Privacy policy
+            ├── signin.html        # Sign-in page
+            ├── register.html      # Registration page
+            ├── profile.html       # User profile page
+            ├── Untitled.html      # Spare/test page
+            ├── felp-ai-universal.js# Shared JS logic (Felp AI loader)
+            ├── chatbot.css        # Chatbot styling
+            ├── businessregister.html # Business register page
+            ├── businessprofile.html  # Business profile page
+            └── js/               # Client JS helpers
+                ├── loading-enhancer.js
+                ├── config.js
+                ├── cache-manager.js
+                └── (other helper scripts)
+
         </code></pre>
 
     <h3>Key Architectural Patterns</h3>
@@ -611,6 +619,119 @@
         <h2>5. Database Schema</h2>
 
         <h3>Core Models</h3>
+   <h2>BLUEBOOK_REG_QUES</h2>
+<table>
+  <tr>
+    <th>ColumnName</th>
+    <th>DataType</th>
+    <th>MaxLength</th>
+    <th>IsNullable</th>
+    <th>IsIdentity</th>
+  </tr>
+  <tr><td>QUES_IDNO</td><td>int</td><td>4</td><td>0</td><td>1</td></tr>
+  <tr><td>QUES_SORT_NO</td><td>int</td><td>4</td><td>0</td><td>0</td></tr>
+  <tr><td>QUES_TEXT</td><td>varchar</td><td>-1</td><td>0</td><td>0</td></tr>
+  <tr><td>QUES_ISMANDATORY</td><td>int</td><td>4</td><td>1</td><td>0</td></tr>
+  <tr><td>PROJECT_IDNO</td><td>int</td><td>4</td><td>1</td><td>0</td></tr>
+  <tr><td>QUES_COLUMN_NAME</td><td>varchar</td><td>100</td><td>1</td><td>0</td></tr>
+  <tr><td>QUES_CATEG_IDNO</td><td>int</td><td>4</td><td>1</td><td>0</td></tr>
+  <tr><td>QUES_OPTION</td><td>varchar</td><td>-1</td><td>1</td><td>0</td></tr>
+</table>
+
+<h2>BLUEBOOK_REG_DETAIL</h2>
+<table>
+  <tr>
+    <th>ColumnName</th>
+    <th>DataType</th>
+    <th>MaxLength</th>
+    <th>IsNullable</th>
+    <th>IsIdentity</th>
+  </tr>
+  <tr><td>REG_IDNO</td><td>int</td><td>4</td><td>0</td><td>1</td></tr>
+  <tr><td>REG_QUES_IDNO</td><td>int</td><td>4</td><td>0</td><td>0</td></tr>
+  <tr><td>REG_ANSWER</td><td>varchar</td><td>-1</td><td>0</td><td>0</td></tr>
+  <tr><td>REG_CRDATE</td><td>datetime</td><td>8</td><td>1</td><td>0</td></tr>
+  <tr><td>REG_CRUSER</td><td>int</td><td>4</td><td>0</td><td>0</td></tr>
+  <tr><td>REG_CATG_IDNO</td><td>int</td><td>4</td><td>1</td><td>0</td></tr>
+</table>
+
+<h2>BLUEBOOK_CATG_MST</h2>
+<table>
+  <tr>
+    <th>ColumnName</th>
+    <th>DataType</th>
+    <th>MaxLength</th>
+    <th>IsNullable</th>
+    <th>IsIdentity</th>
+  </tr>
+  <tr><td>CATG_IDNO</td><td>int</td><td>4</td><td>0</td><td>1</td></tr>
+  <tr><td>CATG_NAME</td><td>varchar</td><td>200</td><td>1</td><td>0</td></tr>
+  <tr><td>PROJECT_IDNO</td><td>int</td><td>4</td><td>1</td><td>0</td></tr>
+  <tr><td>CATG_ICON</td><td>varchar</td><td>500</td><td>1</td><td>0</td></tr>
+</table>
+
+<h2>SSO_BUSINESS_USER_MST</h2>
+<table>
+  <tr>
+    <th>ColumnName</th>
+    <th>DataType</th>
+    <th>MaxLength</th>
+    <th>IsNullable</th>
+    <th>IsIdentity</th>
+  </tr>
+  <tr><td>BS_BUSINESS_ID</td><td>int</td><td>4</td><td>0</td><td>1</td></tr>
+  <tr><td>BS_USER_ID</td><td>int</td><td>4</td><td>1</td><td>0</td></tr>
+  <tr><td>BS_USER_PROJECT_ID</td><td>int</td><td>4</td><td>1</td><td>0</td></tr>
+  <tr><td>BS_COMPANY_NAME</td><td>varchar</td><td>255</td><td>1</td><td>0</td></tr>
+  <tr><td>BS_CATG_ID</td><td>int</td><td>4</td><td>1</td><td>0</td></tr>
+  <tr><td>BS_TAGLINE</td><td>varchar</td><td>-1</td><td>1</td><td>0</td></tr>
+  <tr><td>BS_ABOUT</td><td>varchar</td><td>-1</td><td>1</td><td>0</td></tr>
+  <tr><td>BS_LOGO</td><td>varchar</td><td>-1</td><td>1</td><td>0</td></tr>
+  <tr><td>BS_EMAIL</td><td>varchar</td><td>255</td><td>1</td><td>0</td></tr>
+  <tr><td>BS_PHONE</td><td>varchar</td><td>50</td><td>1</td><td>0</td></tr>
+  <tr><td>BS_WEBSITE</td><td>varchar</td><td>-1</td><td>1</td><td>0</td></tr>
+  <tr><td>BS_ADDRS1</td><td>varchar</td><td>-1</td><td>1</td><td>0</td></tr>
+  <tr><td>BS_ADDRS2</td><td>varchar</td><td>-1</td><td>1</td><td>0</td></tr>
+  <tr><td>BS_CITY</td><td>varchar</td><td>100</td><td>1</td><td>0</td></tr>
+  <tr><td>BS_STATE</td><td>varchar</td><td>100</td><td>1</td><td>0</td></tr>
+  <tr><td>BS_COUNTRY</td><td>varchar</td><td>100</td><td>1</td><td>0</td></tr>
+  <tr><td>BS_PINCODE</td><td>varchar</td><td>20</td><td>1</td><td>0</td></tr>
+  <tr><td>BS_TRADE_LICENSE_NO</td><td>varchar</td><td>100</td><td>1</td><td>0</td></tr>
+  <tr><td>BS_TRADE_LICENSE_IMG</td><td>varchar</td><td>-1</td><td>1</td><td>0</td></tr>
+  <tr><td>BS_VAT_NO</td><td>varchar</td><td>100</td><td>1</td><td>0</td></tr>
+  <tr><td>BS_VAT_IMG</td><td>varchar</td><td>500</td><td>1</td><td>0</td></tr>
+  <tr><td>BS_CERTIFICATE_TITLE</td><td>varchar</td><td>255</td><td>1</td><td>0</td></tr>
+  <tr><td>BS_CERTIFICATE_IMAGE</td><td>varchar</td><td>-1</td><td>1</td><td>0</td></tr>
+</table>
+
+<!-- SSO_BUSINESS_WORKING_HOURS -->
+<h2>SSO_BUSINESS_WORKING_HOURS</h2>
+<table>
+    <tr><th>ColumnName</th><th>DataType</th><th>MaxLength</th><th>IsNullable</th><th>IsIdentity</th></tr>
+    <tr><td>WH_ID</td><td>int</td><td>4</td><td>0</td><td>1</td></tr>
+    <tr><td>WH_MONDAY_START</td><td>time</td><td>5</td><td>1</td><td>0</td></tr>
+    <tr><td>WH_MONDAY_END</td><td>time</td><td>5</td><td>1</td><td>0</td></tr>
+    <tr><td>WH_MONDAY_STATUS</td><td>int</td><td>4</td><td>1</td><td>0</td></tr>
+    <tr><td>WH_TUESDAY_START</td><td>time</td><td>5</td><td>1</td><td>0</td></tr>
+    <tr><td>WH_TUESDAY_END</td><td>time</td><td>5</td><td>1</td><td>0</td></tr>
+    <tr><td>WH_TUESDAY_STATUS</td><td>int</td><td>4</td><td>1</td><td>0</td></tr>
+    <tr><td>WH_WEDNESDAY_START</td><td>time</td><td>5</td><td>1</td><td>0</td></tr>
+    <tr><td>WH_WEDNESDAY_END</td><td>time</td><td>5</td><td>1</td><td>0</td></tr>
+    <tr><td>WH_WEDNESDAY_STATUS</td><td>int</td><td>4</td><td>1</td><td>0</td></tr>
+    <tr><td>WH_THURSDAY_START</td><td>time</td><td>5</td><td>1</td><td>0</td></tr>
+    <tr><td>WH_THURSDAY_END</td><td>time</td><td>5</td><td>1</td><td>0</td></tr>
+    <tr><td>WH_THURSDAY_STATUS</td><td>int</td><td>4</td><td>1</td><td>0</td></tr>
+    <tr><td>WH_FRIDAY_START</td><td>time</td><td>5</td><td>1</td><td>0</td></tr>
+    <tr><td>WH_FRIDAY_END</td><td>time</td><td>5</td><td>1</td><td>0</td></tr>
+    <tr><td>WH_FRIDAY_STATUS</td><td>int</td><td>4</td><td>1</td><td>0</td></tr>
+    <tr><td>WH_SATURDAY_START</td><td>time</td><td>5</td><td>1</td><td>0</td></tr>
+    <tr><td>WH_SATURDAY_END</td><td>time</td><td>5</td><td>1</td><td>0</td></tr>
+    <tr><td>WH_SATURDAY_STATUS</td><td>int</td><td>4</td><td>1</td><td>0</td></tr>
+    <tr><td>WH_SUNDAY_START</td><td>time</td><td>5</td><td>1</td><td>0</td></tr>
+    <tr><td>WH_SUNDAY_END</td><td>time</td><td>5</td><td>1</td><td>0</td></tr>
+    <tr><td>WH_SUNDAY_STATUS</td><td>int</td><td>4</td><td>1</td><td>0</td></tr>
+    <tr><td>WH_BUSINESS_ID</td><td>int</td><td>4</td><td>1</td><td>0</td></tr>
+</table>
 
        <!-- BBD_ERROR_LOG -->
 <h2>BBD_ERROR_LOG</h2>
@@ -1443,8 +1564,8 @@ Types:
     </section>
 
     <footer style="text-align: center; margin-top: 50px; padding: 20px; border-top: 1px solid var(--border-color); color: #666;">
-        <p><strong>Felp Pets Technical Specification v1.0.0</strong></p>
-        <p>This document serves as the technical specification for Felp Pets.</p>
+        <p><strong>MyFinder Technical Specification v1.0.0</strong></p>
+        <p>This document serves as the technical specification for MyFinder.</p>
         <p>Last updated: September 19, 2025</p>
     </footer>
 </body>
