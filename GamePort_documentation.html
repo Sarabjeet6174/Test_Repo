@@ -1206,7 +1206,7 @@ PORT=9000
         <h3>Docker Configuration</h3>
         <p>The application is configured for containerized deployment using Docker. The frontend consists of static HTML, CSS, and JavaScript files, while the backend runs a Python FastAPI server. All services and assets are managed via Docker Compose for easy setup and orchestration.</p>
 
-        <h4>Docker Compose Setup</h4>
+                    <h4>Docker Compose Setup</h4>
         <pre><code>version: '3.8'
 services:
   felp-ai-chat:
@@ -1246,8 +1246,8 @@ services:
 
     volumes:
       - ./ui-Game-Port:/app/ui-Game-Port  # Games frontend
-      - ./pet:/app/pet  # Pets frontend
-      - ./pets.md:/app/pets.md  # Pets project config
+      - ./games.md:/app/games.md  # Games project config
+      - ./games_prompt.txt:/app/games_prompt.txt  # Games AI prompt
       - ./app:/app/app  # Hot reload for Python code (development)
     restart: unless-stopped</code></pre>
     </section>
