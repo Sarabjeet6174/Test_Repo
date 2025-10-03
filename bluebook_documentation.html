@@ -349,15 +349,16 @@
             <div class="tech-item">
                 <h4>Frontend</h4>
                 <ul>
-                    <li><strong>Languages:</strong> HTML5, CSS3, JavaScript (ES6+)</li>
-                    <li><strong>Structure:</strong> Organized by feature/module in folders:
+                   <li><strong>Languages:</strong> HTML5, CSS3, JavaScript (ES6+)</li>
+                    <li><strong>Structure:</strong> Organized in the main bundle:
                         <ul>
-                            <li><code>bluebo/pet/</code>: Main user-facing pages (home, about, profile, register, signin, legal, policy, t&c), CSS, JS, assets</li>
-                            <li><code>chatbot_ui/chatbot_ui/</code>: Chatbot interface (finder.html, finder.js, finder.css, assets)</li>
-                            <li><code>ui-Game-Port/ui-Game-Port/</code>: Game Port UI (home.html, about.html, profile.html, etc.)</li>
-                            <li><code>static/images/profiles/</code>: Profile images and other static assets</li>
-                        </ul>
-                    </li>
+                            <li><code>bb/</code>: Core app
+                                <ul>
+                                    <li>Pages: <code>home.html, about.html, profile.html, register.html, signin.html, t&c.html, legal.html, policy.html, businessregister.html, businessprofile.html, Untitled.html</code></li>
+                                    <li>Styles: <code>home.css, styles.css, style2.css, chatbot.css</code></li>
+                                    <li>JS: <code>felp-ai-universal.js</code> and <code>js/</code> helper scripts</li>
+                                </ul>
+                            </li>
                     <li><strong>Styling:</strong> Custom CSS and Tailwind CSS for responsive design</li>
                     <li><strong>JavaScript:</strong> Modular JS files for interactivity, API calls, and UI logic</li>
                     <li><strong>Navigation:</strong> Static routing via anchor tags between HTML pages</li>
