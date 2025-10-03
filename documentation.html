@@ -570,12 +570,25 @@
 
     <h3>Project Structure</h3>
     <pre><code>frontend/
-├── app/                 # HTML pages for main views (home, about, profile, etc.)
-├── css/                 # CSS files (custom and Tailwind CSS)
-├── js/                  # JavaScript files for interactivity and API calls
-├── assets/              # Images, icons, and other static files
-├── components/          # Reusable HTML/JS/CSS elements
-└── index.html           # Entry point</code></pre>
+    ├── pet/
+    └── pet/
+        ├── home.html           # Home page
+        ├── about.html          # About page
+        ├── profile.html        # User profile page
+        ├── register.html       # Registration page
+        ├── signin.html         # Sign-in page
+        ├── legal.html          # Legal information
+        ├── policy.html         # Privacy policy
+        ├── t&c.html            # Terms & conditions
+        ├── app.js              # Main JS for interactivity and API calls
+        ├── app.css             # Main CSS styles
+        ├── home.css            # Home page specific styles
+        ├── styles.css          # Shared/global styles
+        ├── style2.css          # Additional styles
+        ├── tailwind.config.js  # Tailwind CSS configuration
+        ├── felp-ai-universal.js# Shared JS logic
+        ├── assest/             # Images, icons, and other static files
+        └── js/                 # Additional JS modules
 
     <h3>Key Architectural Patterns</h3>
 
@@ -971,33 +984,77 @@ X-API-Key: &lt;api_key&gt; (for admin operations)</code></pre>
 
         <h4>Backend Environment Variables</h4>
         <pre><code># Database Configuration
-MONGODB_URI=mongodb://localhost:27017/your-app-name
+# FELP AI Chat Platform Configuration
+# Copy this file to .env and fill in your values
 
-# Database Configuration
-SQLSERVER_URI=mssql+pyodbc://username:password@localhost:1433/your_app_db?driver=ODBC+Driver+17+for+SQL+Server
+# =====================================
+# OpenAI Configuration (REQUIRED)
+# =====================================
+OPENAI_API_KEY=your_openai_api_key_here
+OPENAI_MODEL=gpt-4o
 
-# JWT Authentication
-JWT_SECRET=your-super-secure-secret-here
-JWT_EXPIRES_IN=7d
+# =====================================
+# SSO API Configuration (REQUIRED)
+# =====================================
+SSO_API_BASE_URL=https://ssoapi.1touchsolution.co.in/api
+SSO_API_PHONE=9875004566
+SSO_API_OTP=888888
+SSO_API_DEVICE_TOKEN=1
+SSO_API_KEY_PASS=bSky$DMS-2024-bSky#DMS
 
-# Server Configuration
+# =====================================
+# JWT Configuration (REQUIRED)
+# =====================================
+JWT_SECRET_KEY=your-super-secret-jwt-key-change-this-in-production
+JWT_ALGORITHM=HS256
+JWT_ACCESS_TOKEN_EXPIRE_MINUTES=1440
+
+# =====================================
+# Google OAuth Configuration (REQUIRED for Google Sign-In)
+# =====================================
+GOOGLE_CLIENT_ID=your_google_client_id_here
+GOOGLE_CLIENT_SECRET=your_google_client_secret_here
+
+# =====================================
+# Session Configuration (REQUIRED for OAuth)
+# =====================================
+SESSION_SECRET_KEY=your-session-secret-key-change-this-in-production
+
+# =====================================
+# Application Configuration
+# =====================================
+DEBUG=true
+HOST=0.0.0.0
 PORT=9000
-ENV=development
 
-# File Upload & Storage
-UPLOADS_DIR=./static/uploads
-
-# AI Services Integration
-OPENAI_API_KEY=your-openai-key
-ANTHROPIC_API_KEY=your-anthropic-key
-
-# External Service URLs (if applicable)
-SITE_URL=http://localhost:9000
-FRONTEND_URL=http://localhost:9000</code></pre>
+# =====================================
+# Usage Instructions
+# =====================================
+# 1. Copy this file: cp env.example .env
+# 2. Get OpenAI API key: https://platform.openai.com/api-keys
+# 3. Set OPENAI_API_KEY and JWT_SECRET_KEY
+# 4. Run: docker-compose up --build
+#
+# API Endpoints:
+# - Health: http://localhost:9000/health
+# - Auth: http://localhost:9000/auth/signup, /auth/signin
+# - Chat: http://localhost:9000/chat/message, /chat/history
+# - API Docs: http://localhost:9000/docs
+#
+# Frontend Projects (when added):
+# - Games: http://localhost:9000/games
+</code></pre>
 
         <h4>Build & Deployment Process</h4>
+        <h4>Containerization & Orchestration</h4>
+        <ul>
+            <li><strong>Docker Support:</strong> Multi-stage builds for optimized images</li>
+            <li><strong>Volume Management:</strong> Persistent storage for uploads and database</li>
+            <li><strong>Environment Isolation:</strong> Separate containers for each service</li>
+            <li><strong>Health Checks:</strong> Container-level health monitoring</li>
+        </ul>
 
-        <h5>Backend Deployment</h5>
+        <h4>Backend Deployment</h4>
         <pre><code># Development
     uvicorn app.main:app --reload
 
@@ -1016,51 +1073,13 @@ FRONTEND_URL=http://localhost:9000</code></pre>
     alembic upgrade head  # Run Alembic migrations
     </code></pre>
 
-        <h5>Frontend Deployment</h5>
+        <h4>Frontend Deployment</h4>
         <pre><code># Development
     Open your HTML/CSS/JS files in a local server (e.g., Live Server extension or Python's http.server)
 
     # Production
     Host static files on a web server (e.g., Nginx, Apache, or cloud storage)
     </code></pre>
-
-        <h4>Next.js Configuration Features</h4>
-        <ul>
-            <li><strong>Standalone Output:</strong> Configured for containerized deployment</li>
-            <li><strong>Image Optimization:</strong> Remote patterns for YouTube and custom domains</li>
-            <li><strong>CSS Optimization:</strong> Experimental CSS optimization enabled</li>
-            <li><strong>Cache Control:</strong> ETags disabled for better caching strategies</li>
-            <li><strong>Security Headers:</strong> Powered-by header removed</li>
-            <li><strong>React Strict Mode:</strong> Development-time checks enabled</li>
-        </ul>
-
-        <h4>Containerization & Orchestration</h4>
-        <ul>
-            <li><strong>Docker Support:</strong> Multi-stage builds for optimized images</li>
-            <li><strong>Volume Management:</strong> Persistent storage for uploads and database</li>
-            <li><strong>Environment Isolation:</strong> Separate containers for each service</li>
-            <li><strong>Health Checks:</strong> Container-level health monitoring</li>
-        </ul>
-
-        <h4>Backend Deployment</h4>
-        <pre><code># Install dependencies
-yarn install
-
-# Build TypeScript
-yarn build
-
-# Start production server
-yarn start</code></pre>
-
-        <h4>Frontend Deployment</h4>
-        <pre><code># Install dependencies
-yarn install
-
-# Build for production
-yarn build
-
-# Start production server
-yarn start</code></pre>
 
         <h3>Security Implementation</h3>
 
@@ -1112,39 +1131,64 @@ yarn start</code></pre>
         </ul>
 
         <h3>Docker Configuration</h3>
-        <p>The application is configured for containerized deployment with Next.js standalone output.</p>
+        <p>The application is configured for containerized deployment using Docker. The frontend consists of static HTML, CSS, and JavaScript files, while the backend runs a Python FastAPI server. All services and assets are managed via Docker Compose for easy setup and orchestration.</p>
 
         <h4>Docker Compose Setup</h4>
         <pre><code>version: '3.8'
 services:
-  mongodb:
-    image: mongo:latest
+  felp-ai-chat:
+    build: .
+    container_name: felp-ai-chat
     ports:
-      - "27017:27017"
+      - "9000:9000"
+    environment:
+      # ---- OpenAI Configuration ----
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      OPENAI_MODEL: ${OPENAI_MODEL:-gpt-4o}
+
+      # ---- SSO API Configuration ----
+      SSO_API_BASE_URL: ${SSO_API_BASE_URL:-https://ssoapi.1touchsolution.co.in/api}
+      SSO_API_PHONE: ${SSO_API_PHONE:-9875004566}
+      SSO_API_OTP: ${SSO_API_OTP:-888888}
+      SSO_API_DEVICE_TOKEN: ${SSO_API_DEVICE_TOKEN:-1}
+      SSO_API_KEY_PASS: ${SSO_API_KEY_PASS:-bSky$$DMS-2024-bSky#DMS}
+
+      # ---- JWT Configuration ----
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY:-your-super-secret-jwt-key-change-this-in-production}
+      JWT_ALGORITHM: ${JWT_ALGORITHM:-HS256}
+      JWT_ACCESS_TOKEN_EXPIRE_MINUTES: ${JWT_ACCESS_TOKEN_EXPIRE_MINUTES:-1440}
+
+      # ---- Google OAuth Configuration ----
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
+
+      # ---- Application Configuration ----
+      DEBUG: ${DEBUG:-true}
+      HOST: ${HOST:-0.0.0.0}
+      PORT: ${PORT:-9000}
+      TZ: Europe/Berlin
+      
+      # ---- Development ----
+      PYTHONPATH: /app
+
     volumes:
-      - mongodb_data:/data/db
-
-  backend:
-    build: ./backend
-    ports:
-    - "9000:9000"
-    environment:
-      - MONGODB_URI=mongodb://mongodb:27017/your-app-name
-    depends_on:
-      - mongodb
-
-  frontend:
-    build: ./frontend
-    ports:
-    - "9000:9000"
-    environment:
-      - NEXT_PUBLIC_API_URL=http://backend:5002</code></pre>
+      - ./ui-Game-Port:/app/ui-Game-Port  # Games frontend
+      - ./pet:/app/pet  # Pets frontend
+      - ./blue_book:/app/blue_book  # Blue Book frontend
+      - ./games.md:/app/games.md  # Games project config
+      - ./pets.md:/app/pets.md  # Pets project config
+      - ./blue_book.md:/app/blue_book.md  # Blue Book project config
+      - ./games_prompt.txt:/app/games_prompt.txt  # Games AI prompt
+      - ./pets_prompt.txt:/app/pets_prompt.txt  # Pets AI prompt
+      - ./blue_book_prompt.txt:/app/blue_book_prompt.txt  # Blue Book AI prompt
+      - ./app:/app/app  # Hot reload for Python code (development)
+    restart: unless-stopped</code></pre>
     </section>
 
     <section id="monitoring" class="section">
         <h2>10. Monitoring & Logging</h2>
 
-        <h3>Logging Strategy</h3>
+               <h3>Logging Strategy</h3>
         <ul>
             <li><strong>Console logging:</strong> Development environment logging</li>
             <li><strong>Structured logging:</strong> JSON format for production</li>
@@ -1179,62 +1223,65 @@ services:
 
         <h3>Error Handling Patterns</h3>
 
-        <h4>Backend Error Handling</h4>
-        <ul>
-            <li><strong>Centralized Middleware:</strong> Global error handling with logging</li>
-            <li><strong>Structured Responses:</strong> Consistent error response format</li>
-            <li><strong>Development Logging:</strong> Detailed error information in development</li>
-            <li><strong>Production Safety:</strong> Secure error messages without data leakage</li>
-            <li><strong>Async Error Handling:</strong> Express-async-handler for route protection</li>
+           <h3>Testing Framework</h3>
+           <ul>
+              <li><strong>pytest:</strong> Main framework for backend unit, integration, and API tests</li>
+              <li><strong>FastAPI TestClient:</strong> Used for simulating API requests and responses</li>
+              <li><strong>Manual/Browser Testing:</strong> Frontend HTML/CSS/JS tested via browser and developer tools</li>
+              <li><strong>Linting & Type Checking:</strong> <code>flake8</code>, <code>black</code>, <code>isort</code> for Python code quality</li>
+           </ul>
         </ul>
 
         <h4>Frontend Error Handling</h4>
         <ul>
             <li><strong>API Error Responses:</strong> Structured error handling in services</li>
-            <li><strong>User Feedback:</strong> Toast notifications and error states</li>
-            <li><strong>Loading States:</strong> Proper loading indicators during requests</li>
-            <li><strong>Offline Handling:</strong> Graceful degradation for network issues</li>
-            <li><strong>Form Validation:</strong> Client-side validation with error display</li>
-        </ul>
+              <li><strong>Exception Handlers:</strong> FastAPI global exception handlers for consistent error responses</li>
+              <li><strong>Structured Responses:</strong> Standardized error format for API responses</li>
+              <li><strong>Logging:</strong> Log errors and exceptions for debugging and monitoring</li>
+              <li><strong>Development Logging:</strong> Verbose error output in development mode</li>
+              <li><strong>Production Safety:</strong> Hide sensitive error details in production</li>
 
 
         <h3>Test Categories</h3>
 
-        <h4>Unit Tests</h4>
-        <ul>
-            <li>Utility functions</li>
-            <li>Custom hooks</li>
-            <li>Service functions</li>
+              <li><strong>API Error Handling:</strong> JavaScript <code>try/catch</code> for fetch/XHR errors</li>
+              <li><strong>User Feedback:</strong> Display error messages or alerts in the UI</li>
+              <li><strong>Loading States:</strong> Show loading indicators during API calls</li>
+              <li><strong>Offline Handling:</strong> Graceful fallback for network issues</li>
+              <li><strong>Form Validation:</strong> Client-side validation and error display for forms</li>
             <li>Component logic</li>
         </ul>
 
         <h4>Integration Tests</h4>
         <ul>
             <li>API endpoints</li>
-            <li>Database operations</li>
-            <li>Authentication flow</li>
-            <li>Component interactions</li>
-        </ul>
+              <li>Python utility functions (backend)</li>
+              <li>Service/business logic functions (backend)</li>
+              <li>API endpoint logic (backend)</li>
+              <li>JavaScript utility functions (frontend, if any)</li>
 
         <h4>E2E Tests</h4>
         <ul>
             <li>User registration and login</li>
-            <li>Content creation workflow</li>
-            <li>Search functionality</li>
-            <li>Admin panel operations</li>
-        </ul>
+              <li>API endpoint tests using FastAPI TestClient</li>
+              <li>Database operations and queries</li>
+              <li>Authentication and authorization flows</li>
+              <li>End-to-end data flow between backend and frontend (manual/browser)</li>
     </section>
-
+    
     <section id="scalability" class="section">
-        <h2>12. Scalability Considerations</h2>
-        <ul>
-            <li><strong>Microservices architecture:</strong> Break down monolithic backend</li>
-            <li><strong>CDN integration:</strong> Content delivery network for media assets</li>
-            <li><strong>Database sharding:</strong> Horizontal scaling for MongoDB</li>
-            <li><strong>Caching layer:</strong> Redis implementation for performance</li>
-            <li><strong>Load balancing:</strong> Multiple server instances</li>
-        </ul>
-    </section>
+    <h2>12. Scalability Considerations</h2>
+    <ul>
+        <li><strong>Optimized database queries:</strong> Indexing, query optimization, and execution plan analysis in SQL Server</li>
+        <li><strong>Stored procedures & views:</strong> Use of efficient stored procedures and views to reduce application load</li>
+        <li><strong>Connection pooling:</strong> Efficient management of database connections for high concurrency</li>
+        <li><strong>Partitioning & sharding:</strong> Table partitioning for large tables; optional sharding/federation for very large datasets</li>
+        <li><strong>Caching layer:</strong> Redis or in-memory caching to reduce frequent database hits</li>
+        <li><strong>Load balancing:</strong> Multiple backend server instances to distribute traffic</li>
+        <li><strong>CDN integration:</strong> Content delivery network for static assets like images, CSS, JS</li>
+    </ul>
+</section>
+
 
     <section id="workflow" class="section">
         <h2>13. Development Workflow</h2>
@@ -1242,66 +1289,66 @@ services:
         <h3>Branching Strategy</h3>
         <ul>
             <li><strong>Main branch:</strong> Production-ready code with version tags</li>
-            <li><strong>Develop branch:</strong> Integration branch for feature merging</li>
             <li><strong>Feature branches:</strong> Individual feature development (feature/*)</li>
-            <li><strong>Release branches:</strong> Version preparation and stabilization</li>
             <li><strong>Hotfix branches:</strong> Critical production bug fixes</li>
         </ul>
 
         <h3>Code Quality Tools</h3>
         <ul>
-            <li><strong>ESLint:</strong> JavaScript/TypeScript linting with Next.js rules</li>
-            <li><strong>TypeScript:</strong> Strict mode compilation with comprehensive type checking</li>
-            <li><strong>Prettier:</strong> Code formatting consistency (configurable)</li>
-            <li><strong>Husky:</strong> Git hooks for pre-commit quality checks (recommended)</li>
-            <li><strong>Commitlint:</strong> Conventional commit message enforcement</li>
+            <li><strong>flake8:</strong> Python linting for code style and errors</li>
+            <li><strong>black:</strong> Python code formatting</li>
+            <li><strong>isort:</strong> Import sorting for Python files</li>
+            <li><strong>pytest:</strong> Automated backend testing</li>
+            <li><strong>Manual/Browser Testing:</strong> Frontend HTML/CSS/JS tested via browser and developer tools</li>
         </ul>
 
         <h3>Development Environment</h3>
 
         <h4>Local Development Setup</h4>
         <ul>
-            <li><strong>Node.js:</strong> Version 18+ with npm or yarn package manager</li>
-            <li><strong>MongoDB:</strong> Local installation or Docker container</li>
+            <li><strong>Python:</strong> Version 3.12+ (recommended)</li>
+            <li><strong>FastAPI:</strong> Backend server framework</li>
+            <li><strong>SQL Server:</strong> Database (local or remote)</li>
+            <li><strong>Docker Compose:</strong> For containerized development and deployment</li>
             <li><strong>Environment Variables:</strong> .env files for configuration</li>
-            <li><strong>Ports:</strong> Backend (9000), Frontend (9000), MongoDB (27017)</li>
-            <li><strong>Concurrent Development:</strong> Multiple terminal sessions for full-stack development</li>
+            <li><strong>Ports:</strong> Backend & static frontend (9000)</li>
+            <li><strong>Concurrent Development:</strong> Multiple terminal sessions for backend and frontend</li>
         </ul>
 
         <h4>IDE Configuration</h4>
         <ul>
-            <li><strong>TypeScript Support:</strong> Full IntelliSense and error checking</li>
-            <li><strong>ESLint Integration:</strong> Real-time linting and auto-fix</li>
-            <li><strong>Debug Configuration:</strong> VS Code launch configurations for both frontend and backend</li>
-            <li><strong>Extensions:</strong> Recommended extensions for React, TypeScript, and MongoDB development</li>
+            <li><strong>Python Support:</strong> Full IntelliSense and error checking</li>
+            <li><strong>HTML/CSS/JS Extensions:</strong> Recommended for frontend editing</li>
+            <li><strong>Debug Configuration:</strong> VS Code launch configurations for backend (Uvicorn) and static frontend</li>
+            <li><strong>Extensions:</strong> Python, Docker, and SQL Server extensions</li>
         </ul>
 
         <h3>Code Review Process</h3>
         <ul>
             <li><strong>Pull request template:</strong> Standardized PR format</li>
-            <li><strong>Automated testing:</strong> CI/CD pipeline with tests</li>
-            <li><strong>Code quality checks:</strong> ESLint and TypeScript checks</li>
-            <li><strong>Security scanning:</strong> Automated security vulnerability checks</li>
+            <li><strong>Automated testing:</strong> pytest for backend, manual browser testing for frontend</li>
+            <li><strong>Code quality checks:</strong> flake8, black, isort</li>
+            <li><strong>Security scanning:</strong> Review for secrets, credentials, and vulnerabilities</li>
         </ul>
 
         <h3>CI/CD Pipeline (Recommended)</h3>
 
         <h4>Automated Testing</h4>
         <ul>
-            <li><strong>Unit Tests:</strong> Jest execution for both frontend and backend</li>
-            <li><strong>Integration Tests:</strong> API endpoint testing with test database</li>
-            <li><strong>E2E Tests:</strong> Playwright or Cypress for critical user flows</li>
-            <li><strong>Linting & Type Checking:</strong> ESLint and TypeScript checks</li>
-            <li><strong>Security Scanning:</strong> Dependency vulnerability checks</li>
+            <li><strong>Unit Tests:</strong> pytest for backend logic and API endpoints</li>
+            <li><strong>Integration Tests:</strong> FastAPI TestClient for API endpoint testing</li>
+            <li><strong>E2E Tests:</strong> Manual browser-based testing for frontend flows</li>
+            <li><strong>Linting & Formatting:</strong> flake8, black, isort for Python code</li>
+            <li><strong>Security Scanning:</strong> Dependency and secret checks</li>
         </ul>
 
         <h4>Build & Deployment Automation</h4>
         <ul>
-            <li><strong>Multi-stage Builds:</strong> Optimized Docker images for each service</li>
-            <li><strong>Environment Promotion:</strong> Development → Staging → Production</li>
-            <li><strong>Database Migrations:</strong> Automated schema updates and data seeding</li>
+            <li><strong>Docker Compose:</strong> Single FastAPI container serving backend and static frontend</li>
+            <li><strong>Environment Promotion:</strong> Development → Production</li>
+            <li><strong>Database Migrations:</strong> Alembic for schema updates</li>
             <li><strong>Rollback Strategy:</strong> Quick reversion to previous stable versions</li>
-            <li><strong>Monitoring Integration:</strong> Automated deployment notifications</li>
+            <li><strong>Monitoring Integration:</strong> Automated deployment notifications (optional)</li>
         </ul>
 
         <h3>Commit Message Convention</h3>
@@ -1320,20 +1367,20 @@ Types:
 
         <h4>Frontend Code Quality</h4>
         <ul>
-            <li><strong>Component Structure:</strong> Atomic design with reusable components</li>
-            <li><strong>Hooks Best Practices:</strong> Custom hooks for shared logic</li>
-            <li><strong>Performance Optimization:</strong> React.memo, useMemo, useCallback usage</li>
-            <li><strong>Accessibility:</strong> WCAG compliance and semantic HTML</li>
+            <li><strong>Page Structure:</strong> Separate HTML files for each main view</li>
+            <li><strong>Styling:</strong> CSS files with custom styles and optional Tailwind CSS</li>
+            <li><strong>Performance Optimization:</strong> Minimize JS/CSS, optimize images</li>
+            <li><strong>Accessibility:</strong> Semantic HTML and ARIA attributes</li>
             <li><strong>Responsive Design:</strong> Mobile-first approach with Tailwind CSS</li>
         </ul>
 
         <h4>Backend Code Quality</h4>
         <ul>
-            <li><strong>Middleware Organization:</strong> Separation of concerns with dedicated middleware</li>
-            <li><strong>Error Handling:</strong> Consistent error responses and logging</li>
-            <li><strong>Database Optimization:</strong> Efficient queries and proper indexing</li>
-            <li><strong>Security Best Practices:</strong> Input validation and secure headers</li>
-            <li><strong>API Documentation:</strong> Swagger/OpenAPI specification maintenance</li>
+            <li><strong>Service Organization:</strong> Separation of concerns with routers, services, and utils</li>
+            <li><strong>Error Handling:</strong> Consistent error responses and logging (FastAPI exception handlers)</li>
+            <li><strong>Database Optimization:</strong> Efficient SQL queries and proper indexing</li>
+            <li><strong>Security Best Practices:</strong> Input validation, secure headers, JWT, bcrypt</li>
+            <li><strong>API Documentation:</strong> Swagger/OpenAPI auto-generated by FastAPI</li>
         </ul>
     </section>
 
