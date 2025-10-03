@@ -1228,10 +1228,10 @@ services:
       PYTHONPATH: /app
 
     volumes:
-      - ./ui-Game-Port:/app/ui-Game-Port  # Games frontend
-      - ./games.md:/app/games.md  # Games project config
-      - ./games_prompt.txt:/app/games_prompt.txt  # Games AI prompt
-      - ./app:/app/app  # Hot reload for Python code (development)
+      - ./GamePort:/app/GamePort          # Games frontend
+      - ./GamePort.md:/app/GamePort.md        # Games project config
+      - ./GamePort_prompt.txt:/app/GamePort_prompt.txt
+      - ./app:/app/app  # Hot reload for Python code (development)
     restart: unless-stopped</code></pre>
     </section>
 

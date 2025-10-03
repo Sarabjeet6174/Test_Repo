@@ -1228,10 +1228,10 @@ services:
       PYTHONPATH: /app
 
     volumes:
-      - ./pet:/app/pet  # Pets frontend
-      - ./pets.md:/app/pets.md  # Pets project config
-      - ./app:/app/app  # Hot reload for Python code (development)
-    restart: unless-stopped</code></pre>
+      - ./PetsShop:/app/PetsShop          # Pets frontend
+      - ./PetsShop.md:/app/PetsShop.md        # Pets project config
+      - ./PetsShop_prompt.txt:/app/PetsShop_prompt.txt
+      - ./app:/app/app  # Hot reload for Python code (development)</code></pre>
     </section>
 
     <section id="monitoring" class="section">

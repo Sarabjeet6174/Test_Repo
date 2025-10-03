@@ -1226,6 +1226,9 @@ services:
       PYTHONPATH: /app
 
     volumes:
+      - ./FelpBooking:/app/FelpBooking    # Felp booking frontend
+      - ./FelpBooking.md:/app/FelpBooking.md  # Felp booking project config
+      - ./FelpBooking_prompt.txt:/app/FelpBooking_prompt.txt
       - ./app:/app/app  # Hot reload for Python code (development)
     restart: unless-stopped</code></pre>
     </section>

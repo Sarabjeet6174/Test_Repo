@@ -1341,9 +1341,9 @@ services:
       PYTHONPATH: /app
 
     volumes:
-      - ./blue_book:/app/blue_book  # Blue Book frontend
-      - ./blue_book.md:/app/blue_book.md  # Blue Book project config
-      - ./blue_book_prompt.txt:/app/blue_book_prompt.txt  # Blue Book AI prompt
+      - ./MyFinder:/app/MyFinder          # Blue Book frontend
+      - ./MyFinder.md:/app/MyFinder.md        # Blue Book project config
+      - ./MyFinder_prompt.txt:/app/MyFinder_prompt.txt
       - ./app:/app/app  # Hot reload for Python code (development)
     restart: unless-stopped</code></pre>
     </section>
