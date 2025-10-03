@@ -460,159 +460,150 @@
                 </ul>
     </section>
 
-    <section id="backend" class="section">
-        <h2>3. Backend Architecture</h2>
+   <section id="backend" class="section">
+    <h2>3. Backend Architecture</h2>
 
-        <h3>Project Structure</h3>
-        <pre><code>backend/
-    app/
-    ├── main.py                # FastAPI entry point
-    ├── config/                # Configuration files (JWT, SQL Server, etc.)
-    ├── models/                # SQLAlchemy models (User, Content, etc.)
-    ├── routers/               # API route definitions
-    ├── services/              # Business logic services (chat, project, etc.)
-    ├── utils/                 # Utility functions (auth, etc.)
-    └── static/                # Static files (images, uploads)
+    <h3>Project Structure</h3>
+    <pre><code>backend/
+├── app/
+│   ├── main.py           # FastAPI entry point
+│   ├── config/           # Configuration files (JWT, SQL Server, etc.)
+│   ├── models/           # SQLAlchemy models (User, Content, etc.)
+│   ├── routers/          # API route definitions
+│   ├── services/         # Business logic services (chat, project, etc.)
+│   ├── utils/            # Utility functions (auth, helpers)
+│   └── static/           # Static files (images, uploads)
+</code></pre>
 
-        <h3>Core Components</h3>
+    <h3>Core Components</h3>
 
-            <h4>Authentication & Authorization</h4>
-            <ul>
-                <li><strong>JWT-based authentication</strong> with Bearer token scheme (FastAPI + PyJWT)</li>
-                <li><strong>Role-based access control</strong> (user, admin)</li>
-                <li><strong>Password hashing</strong> using bcrypt</li>
-                <li><strong>Dependency injection:</strong> FastAPI Depends for authentication and authorization</li>
-            </ul>
+    <h4>Authentication & Authorization</h4>
+    <ul>
+        <li><strong>JWT-based authentication</strong> with Bearer token scheme (FastAPI + PyJWT)</li>
+        <li><strong>Role-based access control</strong> (user, admin)</li>
+        <li><strong>Password hashing</strong> using bcrypt</li>
+        <li><strong>Dependency injection:</strong> FastAPI Depends for auth and authorization</li>
+    </ul>
 
-            <h4>API Structure</h4>
-            <p>The API follows RESTful conventions with structured routing using FastAPI routers and dependency injection.</p>
+    <h4>API Structure</h4>
+    <p>The API follows RESTful conventions with structured routing using FastAPI routers and dependency injection.</p>
 
-            <h4>Middleware Architecture</h4>
-            <ul>
-                <li><strong>CORS Middleware:</strong> Configurable cross-origin resource sharing (FastAPI)</li>
-                <li><strong>Authentication Middleware:</strong> JWT token verification with role-based access</li>
-                <li><strong>Optional Auth Dependency:</strong> Non-blocking authentication for public endpoints</li>
-                <li><strong>Admin Dependency:</strong> Role-based authorization guards</li>
-                <li><strong>Error Handling:</strong> Exception handlers in FastAPI</li>
-                <li><strong>File Upload:</strong> FastAPI UploadFile for file handling</li>
-            </ul>
+    <h4>Middleware Architecture</h4>
+    <ul>
+        <li><strong>CORS Middleware:</strong> Configurable cross-origin resource sharing (FastAPI)</li>
+        <li><strong>Authentication Middleware:</strong> JWT token verification with role-based access</li>
+        <li><strong>Optional Auth Dependency:</strong> Non-blocking authentication for public endpoints</li>
+        <li><strong>Admin Dependency:</strong> Role-based authorization guards</li>
+        <li><strong>Error Handling:</strong> Exception handlers in FastAPI</li>
+        <li><strong>File Upload:</strong> FastAPI UploadFile for file handling</li>
+    </ul>
 
+    <h4>API Endpoints</h4>
+    <div class="api-endpoint">
+        <span class="method">GET</span> <span class="endpoint">/api/health</span> - Application health check
+    </div>
+    <div class="api-endpoint">
+        <span class="method">POST</span> <span class="endpoint">/api/auth/login</span> - User login
+    </div>
+    <div class="api-endpoint">
+        <span class="method">POST</span> <span class="endpoint">/api/auth/register</span> - User registration
+    </div>
+    <div class="api-endpoint">
+        <span class="method">GET</span> <span class="endpoint">/api/auth/profile</span> - Get user profile
+    </div>
+    <div class="api-endpoint">
+        <span class="method">POST</span> <span class="endpoint">/api/chat/send</span> - Send chat message
+    </div>
+    <div class="api-endpoint">
+        <span class="method">GET</span> <span class="endpoint">/api/chat/history</span> - Get chat history
+    </div>
+    <div class="api-endpoint">
+        <span class="method">GET</span> <span class="endpoint">/api/projects</span> - List projects
+    </div>
+    <div class="api-endpoint">
+        <span class="method">POST</span> <span class="endpoint">/api/projects</span> - Create project
+    </div>
+    <div class="api-endpoint">
+        <span class="method">GET</span> <span class="endpoint">/api/chatbot</span> - Chatbot AI endpoint
+    </div>
+    <div class="api-endpoint">
+        <span class="method">GET</span> <span class="endpoint">/static/images/profiles/{filename}</span> - Serve profile images
+    </div>
 
-        <div class="api-endpoint">
-            <span class="method">GET</span> <span class="endpoint">/api/health</span> - Application health check
-        </div>
-        <div class="api-endpoint">
-            <span class="method">POST</span> <span class="endpoint">/api/auth/login</span> - User login
-        </div>
-        <div class="api-endpoint">
-            <span class="method">POST</span> <span class="endpoint">/api/auth/register</span> - User registration
-        </div>
-        <div class="api-endpoint">
-            <span class="method">GET</span> <span class="endpoint">/api/auth/profile</span> - Get user profile
-        </div>
-        <div class="api-endpoint">
-            <span class="method">POST</span> <span class="endpoint">/api/chat/send</span> - Send chat message
-        </div>
-        <div class="api-endpoint">
-            <span class="method">GET</span> <span class="endpoint">/api/chat/history</span> - Get chat history
-        </div>
-        <div class="api-endpoint">
-            <span class="method">GET</span> <span class="endpoint">/api/projects</span> - List projects
-        </div>
-        <div class="api-endpoint">
-            <span class="method">POST</span> <span class="endpoint">/api/projects</span> - Create project
-        </div>
-        <div class="api-endpoint">
-            <span class="method">GET</span> <span class="endpoint">/api/chatbot</span> - Chatbot AI endpoint
-        </div>
-        <div class="api-endpoint">
-            <span class="method">GET</span> <span class="endpoint">/static/images/profiles/{filename}</span> - Serve profile images
-        </div>
+    <h4> Key Routes</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>Method</th>
+                <th>Route</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>GET</td><td>/health</td><td>Service health check</td></tr>
+            <tr><td>GET</td><td>/</td><td>Root endpoint (service info)</td></tr>
+            <tr><td>GET</td><td>/config/frontend</td><td>Get frontend configuration</td></tr>
+            <tr><td>GET</td><td>/config/projects</td><td>Get available projects configuration</td></tr>
+            <tr><td>GET</td><td>/projects/</td><td>List all projects</td></tr>
+            <tr><td>GET</td><td>/projects/{project_id}</td><td>Get details for a specific project</td></tr>
+            <tr><td>POST</td><td>/projects/reload</td><td>Reload project configurations</td></tr>
+            <tr><td>GET</td><td>/projects/{project_id}/prompt</td><td>Get AI prompt for a project</td></tr>
+            <tr><td>GET</td><td>/chatbot/</td><td>Serve chatbot test interface (HTML)</td></tr>
+            <tr><td>GET</td><td>/chatbot/assets/{filename}</td><td>Serve chatbot static assets</td></tr>
+            <tr><td>POST</td><td>/chatbot/start</td><td>Start chatbot session</td></tr>
+            <tr><td>POST</td><td>/chatbot/answer</td><td>Submit answer to chatbot question</td></tr>
+            <tr><td>POST</td><td>/chatbot/status</td><td>Get chatbot session status</td></tr>
+            <tr><td>GET</td><td>/chatbot/saved-answers</td><td>Get previously saved registration answers</td></tr>
+            <tr><td>POST</td><td>/chat/message</td><td>Send chat message (AI response)</td></tr>
+            <tr><td>GET</td><td>/chat/history</td><td>Get user's chat history</td></tr>
+            <tr><td>POST</td><td>/chat/search</td><td>Search user's chats (POST)</td></tr>
+            <tr><td>GET</td><td>/chat/search</td><td>Search user's chats (GET)</td></tr>
+            <tr><td>GET</td><td>/chat/ids</td><td>Get all chat IDs for a user</td></tr>
+            <tr><td>GET</td><td>/chat/latest</td><td>Get user's latest chat session</td></tr>
+            <tr><td>GET</td><td>/chat/{chat_id}</td><td>Get specific chat session by ID</td></tr>
+        </tbody>
+    </table>
+</section>
 
-        <h4>Key Routes</h4>
-        <table>
-            <thead>
-                <tr>
-                    <th>Route Group</th>
-                    <th>Base Path</th>
-                    <th>Description</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Authentication</td>
-                    <td><code>/api/auth</code></td>
-                    <td>User registration, login, profile management</td>
-                </tr>
-                <tr>
-                    <td>Admin</td>
-                    <td><code>/api/admin</code></td>
-                    <td>Administrative operations, user management</td>
-                </tr>
-                <tr>
-                    <td>Content Management</td>
-                    <td><code>/api/content</code></td>
-                    <td>CRUD operations for content entities</td>
-                </tr>
-                <tr>
-                    <td>Reviews</td>
-                    <td><code>/api/reviews</code></td>
-                    <td>Review and rating system</td>
-                </tr>
-                <tr>
-                    <td>AI Search</td>
-                    <td><code>/api/ai-search</code></td>
-                    <td>AI-enhanced search capabilities</td>
-                </tr>
-                <tr>
-                    <td>Attributes</td>
-                    <td><code>/api/categories</code>, <code>/api/countries</code>, etc.</td>
-                    <td>Dynamic attribute management</td>
-                </tr>
-            </tbody>
-        </table>
-        <h4>All Actual API Routes</h4>
-        <table>
-            <thead>
-                <tr>
-                    <th>Method</th>
-                    <th>Route</th>
-                    <th>Description</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr><td>GET</td><td>/health</td><td>Service health check</td></tr>
-                <tr><td>GET</td><td>/</td><td>Root endpoint (service info)</td></tr>
-                <tr><td>GET</td><td>/config/frontend</td><td>Get frontend configuration</td></tr>
-                <tr><td>GET</td><td>/config/projects</td><td>Get available projects configuration</td></tr>
-                <tr><td>GET</td><td>/projects/</td><td>List all projects</td></tr>
-                <tr><td>GET</td><td>/projects/{project_id}</td><td>Get details for a specific project</td></tr>
-                <tr><td>POST</td><td>/projects/reload</td><td>Reload project configurations</td></tr>
-                <tr><td>GET</td><td>/projects/{project_id}/prompt</td><td>Get AI prompt for a project</td></tr>
-                <tr><td>GET</td><td>/chatbot/</td><td>Serve chatbot test interface (HTML)</td></tr>
-                <tr><td>GET</td><td>/chatbot/assets/{filename}</td><td>Serve chatbot static assets</td></tr>
-                <tr><td>POST</td><td>/chatbot/start</td><td>Start chatbot session</td></tr>
-                <tr><td>POST</td><td>/chatbot/answer</td><td>Submit answer to chatbot question</td></tr>
-                <tr><td>POST</td><td>/chatbot/status</td><td>Get chatbot session status</td></tr>
-                <tr><td>GET</td><td>/chatbot/saved-answers</td><td>Get previously saved registration answers</td></tr>
-                <tr><td>POST</td><td>/chat/message</td><td>Send chat message (AI response)</td></tr>
-                <tr><td>GET</td><td>/chat/history</td><td>Get user's chat history</td></tr>
-                <tr><td>POST</td><td>/chat/search</td><td>Search user's chats (POST)</td></tr>
-                <tr><td>GET</td><td>/chat/search</td><td>Search user's chats (GET)</td></tr>
-                <tr><td>GET</td><td>/chat/ids</td><td>Get all chat IDs for a user</td></tr>
-                <tr><td>GET</td><td>/chat/latest</td><td>Get user's latest chat session</td></tr>
-                <tr><td>GET</td><td>/chat/{chat_id}</td><td>Get specific chat session by ID</td></tr>
-            </tbody>
-        </table>
-    </section>
+  <section id="frontend" class="section">
+    <h2>4. Frontend Architecture</h2>
 
-    <section id="frontend" class="section">
-        <h2>4. Frontend Architecture</h2>
+    <h3>Project Structure</h3>
+    <pre><code>frontend/
+├── app/                 # HTML pages for main views (home, about, profile, etc.)
+├── css/                 # CSS files (custom and Tailwind CSS)
+├── js/                  # JavaScript files for interactivity and API calls
+├── assets/              # Images, icons, and other static files
+├── components/          # Reusable HTML/JS/CSS elements
+└── index.html           # Entry point</code></pre>
 
-        <h3>Project Structure</h3>
-        <pre><code>pet/
+    <h3>Key Architectural Patterns</h3>
 
-    </section>
+    <h4>Frontend Structure</h4>
+    <ul>
+        <li><strong>Pages:</strong> HTML files for each main view (home, about, profile, etc.)</li>
+        <li><strong>Styling:</strong> CSS files with custom styles and optional Tailwind CSS</li>
+        <li><strong>JavaScript:</strong> JS files for interactivity, API calls, and DOM manipulation</li>
+        <li><strong>Assets:</strong> Images, icons, and other static resources</li>
+        <li><strong>Reusable Elements:</strong> Shared CSS classes and JS functions in <code>components/</code></li>
+    </ul>
+
+    <h4>Routing & Navigation</h4>
+    <ul>
+        <li><strong>Page Navigation:</strong> Standard anchor links between HTML pages</li>
+        <li><strong>Dynamic Content:</strong> JavaScript-driven updates and modals</li>
+        <li><strong>SEO Optimization:</strong> Semantic HTML, meta tags, and structured content</li>
+    </ul>
+
+    <h4>Service Layer Architecture</h4>
+    <ul>
+        <li><strong>API Calls:</strong> Fetch API or Axios for backend communication</li>
+        <li><strong>Error Handling:</strong> JavaScript try/catch with user-friendly messages</li>
+        <li><strong>Authentication:</strong> JWT token management in <code>localStorage</code> or <code>sessionStorage</code></li>
+        <li><strong>Reusability:</strong> Centralized service functions for consistent API interaction</li>
+    </ul>
+</section>
+
 
     <section id="database" class="section">
         <h2>5. Database Schema</h2>
@@ -637,31 +628,6 @@
   urlPath: string;        // Generated path (/type/slug)
   featuredImage: string;
   gallery: Array<{
-
-        <h3>Key Architectural Patterns</h3>
-
-        <h4>Frontend Structure</h4>
-        <ul>
-            <li><strong>Pages:</strong> HTML files for each main view (home, about, profile, etc.)</li>
-            <li><strong>Styling:</strong> CSS files (custom and Tailwind CSS)</li>
-            <li><strong>JavaScript:</strong> JS files for interactivity and API calls</li>
-            <li><strong>Assets:</strong> Images, icons, and other static files</li>
-            <li><strong>Reusable Elements:</strong> Shared CSS classes and JS functions</li>
-        </ul>
-
-        <h4>Routing & Navigation</h4>
-        <ul>
-            <li><strong>Page Navigation:</strong> Standard anchor links between HTML pages</li>
-            <li><strong>Dynamic Content:</strong> JavaScript-driven updates and modals</li>
-            <li><strong>SEO Optimization:</strong> Semantic HTML and meta tags</li>
-        </ul>
-
-        <h4>Service Layer Architecture</h4>
-        <ul>
-            <li><strong>API Calls:</strong> Fetch/Axios for backend communication</li>
-            <li><strong>Error Handling:</strong> JavaScript error handling and user feedback</li>
-            <li><strong>Authentication:</strong> JWT token management in localStorage/sessionStorage</li>
-        </ul>
     type: 'image' | 'video' | 'external';
     url: string;
   }>;
@@ -795,41 +761,74 @@ X-API-Key: &lt;api_key&gt; (for admin operations)</code></pre>
 
         <h3>Key API Endpoints</h3>
 
-        <h4>Authentication</h4>
-        <div class="api-endpoint">
-            <span class="method">POST</span> <span class="endpoint">/api/auth/register</span> - User registration
-        </div>
-        <div class="api-endpoint">
-            <span class="method">POST</span> <span class="endpoint">/api/auth/login</span> - User login
-        </div>
-        <div class="api-endpoint">
-            <span class="method">GET</span> <span class="endpoint">/api/auth/profile</span> - Get user profile
-        </div>
+    <h4>Authentication</h4>
+    <div class="api-endpoint">
+        <span class="method">POST</span> <span class="endpoint">/api/auth/register</span> - User registration
+    </div>
+    <div class="api-endpoint">
+        <span class="method">POST</span> <span class="endpoint">/api/auth/login</span> - User login
+    </div>
+    <div class="api-endpoint">
+        <span class="method">GET</span> <span class="endpoint">/api/auth/profile</span> - Get user profile
+    </div>
 
-        <h4>Content Management</h4>
-        <div class="api-endpoint">
-            <span class="method">GET</span> <span class="endpoint">/api/content</span> - List content with filters
-        </div>
-        <div class="api-endpoint">
-            <span class="method">POST</span> <span class="endpoint">/api/content</span> - Create new content (Admin)
-        </div>
-        <div class="api-endpoint">
-            <span class="method">GET</span> <span class="endpoint">/api/content/slug/:slug</span> - Get content by slug
-        </div>
-        <div class="api-endpoint">
-            <span class="method">PUT</span> <span class="endpoint">/api/content/:id</span> - Update content
-        </div>
+    <h4>Projects</h4>
+    <div class="api-endpoint">
+        <span class="method">GET</span> <span class="endpoint">/projects/</span> - List all projects
+    </div>
+    <div class="api-endpoint">
+        <span class="method">GET</span> <span class="endpoint">/projects/{project_id}</span> - Get details for a specific project
+    </div>
+    <div class="api-endpoint">
+        <span class="method">POST</span> <span class="endpoint">/projects/reload</span> - Reload project configurations
+    </div>
+    <div class="api-endpoint">
+        <span class="method">GET</span> <span class="endpoint">/projects/{project_id}/prompt</span> - Get AI prompt for a project
+    </div>
 
-        <h4>AI Search</h4>
-        <div class="api-endpoint">
-            <span class="method">POST</span> <span class="endpoint">/api/ai-search/enhanced</span> - AI-powered search
-        </div>
-        <div class="api-endpoint">
-            <span class="method">POST</span> <span class="endpoint">/api/ai-search/chat-plan</span> - Generate chat-based plans
-        </div>
-    </section>
+    <h4>Chatbot / Real-time Features</h4>
+    <div class="api-endpoint">
+        <span class="method">GET</span> <span class="endpoint">/chatbot/</span> - Serve chatbot test interface (HTML)
+    </div>
+    <div class="api-endpoint">
+        <span class="method">GET</span> <span class="endpoint">/chatbot/assets/{filename}</span> - Serve chatbot static assets
+    </div>
+    <div class="api-endpoint">
+        <span class="method">POST</span> <span class="endpoint">/chatbot/start</span> - Start chatbot session
+    </div>
+    <div class="api-endpoint">
+        <span class="method">POST</span> <span class="endpoint">/chatbot/answer</span> - Submit answer to chatbot question
+    </div>
+    <div class="api-endpoint">
+        <span class="method">POST</span> <span class="endpoint">/chatbot/status</span> - Get chatbot session status
+    </div>
+    <div class="api-endpoint">
+        <span class="method">GET</span> <span class="endpoint">/chatbot/saved-answers</span> - Get previously saved registration answers
+    </div>
+    <div class="api-endpoint">
+        <span class="method">POST</span> <span class="endpoint">/chat/message</span> - Send chat message (AI response)
+    </div>
+    <div class="api-endpoint">
+        <span class="method">GET</span> <span class="endpoint">/chat/history</span> - Get user's chat history
+    </div>
+    <div class="api-endpoint">
+        <span class="method">POST</span> <span class="endpoint">/chat/search</span> - Search user's chats (POST)
+    </div>
+    <div class="api-endpoint">
+        <span class="method">GET</span> <span class="endpoint">/chat/search</span> - Search user's chats (GET)
+    </div>
+    <div class="api-endpoint">
+        <span class="method">GET</span> <span class="endpoint">/chat/ids</span> - Get all chat IDs for a user
+    </div>
+    <div class="api-endpoint">
+        <span class="method">GET</span> <span class="endpoint">/chat/latest</span> - Get user's latest chat session
+    </div>
+    <div class="api-endpoint">
+        <span class="method">GET</span> <span class="endpoint">/chat/{chat_id}</span> - Get specific chat session by ID
+    </div>
+</section>
 
-    <section id="features" class="section">
+ <section id="features" class="section">
         <h2>7. Key Features</h2>
 
         <div class="feature-list">
@@ -840,38 +839,47 @@ X-API-Key: &lt;api_key&gt; (for admin operations)</code></pre>
                     <li>Semantic search understanding</li>
                     <li>Context-aware filtering</li>
                     <li>Intelligent content discovery</li>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Method</th>
-                            <th>Route</th>
-                            <th>Description</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>GET</td><td>/health</td><td>Service health check</td></tr>
-                        <tr><td>GET</td><td>/</td><td>Root endpoint (service info)</td></tr>
-                        <tr><td>GET</td><td>/config/frontend</td><td>Get frontend configuration</td></tr>
-                        <tr><td>GET</td><td>/config/projects</td><td>Get available projects configuration</td></tr>
-                        <tr><td>GET</td><td>/projects/</td><td>List all projects</td></tr>
-                        <tr><td>GET</td><td>/projects/{project_id}</td><td>Get details for a specific project</td></tr>
-                        <tr><td>POST</td><td>/projects/reload</td><td>Reload project configurations</td></tr>
-                        <tr><td>GET</td><td>/projects/{project_id}/prompt</td><td>Get AI prompt for a project</td></tr>
-                        <tr><td>GET</td><td>/chatbot/</td><td>Serve chatbot test interface (HTML)</td></tr>
-                        <tr><td>GET</td><td>/chatbot/assets/{filename}</td><td>Serve chatbot static assets</td></tr>
-                        <tr><td>POST</td><td>/chatbot/start</td><td>Start chatbot session</td></tr>
-                        <tr><td>POST</td><td>/chatbot/answer</td><td>Submit answer to chatbot question</td></tr>
-                        <tr><td>POST</td><td>/chatbot/status</td><td>Get chatbot session status</td></tr>
-                        <tr><td>GET</td><td>/chatbot/saved-answers</td><td>Get previously saved registration answers</td></tr>
-                        <tr><td>POST</td><td>/chat/message</td><td>Send chat message (AI response)</td></tr>
-                        <tr><td>GET</td><td>/chat/history</td><td>Get user's chat history</td></tr>
-                        <tr><td>POST</td><td>/chat/search</td><td>Search user's chats (POST)</td></tr>
-                        <tr><td>GET</td><td>/chat/search</td><td>Search user's chats (GET)</td></tr>
-                        <tr><td>GET</td><td>/chat/ids</td><td>Get all chat IDs for a user</td></tr>
-                        <tr><td>GET</td><td>/chat/latest</td><td>Get user's latest chat session</td></tr>
-                        <tr><td>GET</td><td>/chat/{chat_id}</td><td>Get specific chat session by ID</td></tr>
-                    </tbody>
-                </table>
+                </ul>
+            </div>
+
+            <div class="feature-item">
+                <h4>Dynamic Content Management</h4>
+                <p>Complete CRUD operations for various content types with rich metadata, galleries, and dynamic attributes.</p>
+                <ul>
+                    <li>Multi-format media galleries</li>
+                    <li>Flexible categorization system</li>
+                    <li>SEO-optimized URLs</li>
+                </ul>
+            </div>
+
+            <div class="feature-item">
+                <h4>Review & Rating System</h4>
+                <p>User-generated reviews with admin moderation and analytics.</p>
+                <ul>
+                    <li>Star rating system (1-5)</li>
+                    <li>Admin review moderation</li>
+                    <li>Review statistics and analytics</li>
+                </ul>
+            </div>
+
+            <div class="feature-item">
+                <h4>Admin Dashboard</h4>
+                <p>Comprehensive admin panel for content management and system administration.</p>
+                <ul>
+                    <li>User management</li>
+                    <li>Content moderation</li>
+                    <li>Analytics and reporting</li>
+                    <li>Dynamic attribute management</li>
+                </ul>
+            </div>
+
+            <div class="feature-item">
+                <h4>Responsive Design</h4>
+                <p>Modern, mobile-first design with smooth animations and optimal UX.</p>
+                <ul>
+                    <li>Tailwind CSS styling</li>
+                    <li>Motion-based animations</li>
+                    <li>Custom cursor effects</li>
                 </ul>
             </div>
 
@@ -886,6 +894,7 @@ X-API-Key: &lt;api_key&gt; (for admin operations)</code></pre>
             </div>
         </div>
     </section>
+
 
     <section id="guidelines" class="section">
         <h2>8. Development Guidelines</h2>
